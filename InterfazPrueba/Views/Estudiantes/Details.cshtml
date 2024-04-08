@@ -1,0 +1,74 @@
+﻿@model InterfazPrueba.Models.Estudiante
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estudiante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ci_estudiante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ci_estudiante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo_electronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo_electronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.programa_academico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.programa_academico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado_matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado_matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.borrado_logico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_borrado_logico)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_estudiante }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

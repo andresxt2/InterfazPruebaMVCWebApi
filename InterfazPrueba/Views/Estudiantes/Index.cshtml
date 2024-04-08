@@ -1,0 +1,60 @@
+﻿@model IEnumerable<InterfazPrueba.Models.Estudiante>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ci_estudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correo_electronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.programa_academico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado_matricula)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ci_estudiante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo_electronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.programa_academico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado_matricula)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_estudiante }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_estudiante }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_estudiante })
+            </td>
+        </tr>
+    }
+
+</table>
+
