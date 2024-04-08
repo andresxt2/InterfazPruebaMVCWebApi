@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,6 @@ namespace InterfazPrueba.Models
         public Nullable<bool> borrado_logico { get; set; }
         public Nullable<System.DateTime> fecha_borrado_logico { get; set; }
 
-        public virtual Estudiantes Estudiantes { get; set; }
+        public Estudiante Estudiantes { get; set; }
     }
 }

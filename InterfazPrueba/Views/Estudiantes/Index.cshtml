@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<InterfazPrueba.Models.Estudiante>
 
+
+
 @{
     ViewBag.Title = "Index";
 }
+
 
 <h2>Index</h2>
 
@@ -55,6 +58,12 @@
             </td>
         </tr>
     }
-
 </table>
 
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}

@@ -51,7 +51,6 @@ namespace InterfazPrueba.Logica
         public void crearEstudiante(Models.Estudiante estudiante)
         {
             localhost.Estudiantes estudianteWS = new localhost.Estudiantes();
-            estudianteWS.id_estudiante = estudiante.id_estudiante;
             estudianteWS.ci_estudiante = estudiante.ci_estudiante;
             estudianteWS.nombre = estudiante.nombre;
             estudianteWS.correo_electronico = estudiante.correo_electronico;

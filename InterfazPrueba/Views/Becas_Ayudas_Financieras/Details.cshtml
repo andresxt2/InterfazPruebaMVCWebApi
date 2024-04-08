@@ -1,0 +1,74 @@
+﻿@model InterfazPrueba.Models.Becas_Ayudas_Financieras
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Becas_Ayudas_Financieras</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_estudiante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_estudiante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_beca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_beca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.borrado_logico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_borrado_logico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estudiantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estudiantes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_beca }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

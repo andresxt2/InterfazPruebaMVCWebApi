@@ -117,6 +117,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
             return RedirectToAction("Index");
         }
 
+        /*
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -124,6 +125,6 @@ namespace InterfazPrueba.Views.UIEstudiantes
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

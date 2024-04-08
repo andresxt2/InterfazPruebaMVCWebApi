@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Listar">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarResult" type="tns:ArrayOfBecas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBecas_Ayudas_Financieras">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Becas_Ayudas_Financieras" nillable="true" type="tns:Becas_Ayudas_Financieras" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Becas_Ayudas_Financieras">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_beca" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_beca" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="monto" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="borrado_logico" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_borrado_logico" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estudiantes" type="tns:Estudiantes" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Estudiantes">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ci_estudiante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="correo_electronico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="programa_academico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estado_matricula" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="borrado_logico" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_borrado_logico" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Becas_Ayudas_Financieras" type="tns:ArrayOfBecas_Ayudas_Financieras" />
+          <s:element minOccurs="0" maxOccurs="1" name="Morosidad" type="tns:ArrayOfMorosidad" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pagos" type="tns:ArrayOfPagos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMorosidad">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Morosidad" nillable="true" type="tns:Morosidad" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Morosidad">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_morosidad" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dias_retraso" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="monto_debido" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="borrado_logico" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_borrado_logico" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estudiantes" type="tns:Estudiantes" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPagos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Pagos" nillable="true" type="tns:Pagos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Pagos">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_pago" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_pago" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="monto" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="borrado_logico" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_borrado_logico" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Estudiantes" type="tns:Estudiantes" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListarPorEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPorEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPorEstudianteResult" type="tns:ArrayOfBecas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPorTipo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPorTipoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPorTipoResult" type="tns:ArrayOfBecas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPorTipoBeca">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPorTipoBecaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPorTipoBecaResult" type="tns:Becas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="leerPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="leerPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="leerPorIdResult" type="tns:Becas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Insertar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="beca" type="tns:Becas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertarResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Actualizar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="beca" type="tns:Becas_Ayudas_Financieras" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActualizarResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Eliminar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EliminarResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListarSoapIn">
+    <wsdl:part name="parameters" element="tns:Listar" />
+  </wsdl:message>
+  <wsdl:message name="ListarSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPorEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPorEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorTipoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPorTipo" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorTipoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPorTipoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorTipoBecaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPorTipoBeca" />
+  </wsdl:message>
+  <wsdl:message name="ListarPorTipoBecaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPorTipoBecaResponse" />
+  </wsdl:message>
+  <wsdl:message name="leerPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:leerPorId" />
+  </wsdl:message>
+  <wsdl:message name="leerPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:leerPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertarSoapIn">
+    <wsdl:part name="parameters" element="tns:Insertar" />
+  </wsdl:message>
+  <wsdl:message name="InsertarSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarSoapIn">
+    <wsdl:part name="parameters" element="tns:Actualizar" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarSoapIn">
+    <wsdl:part name="parameters" element="tns:Eliminar" />
+  </wsdl:message>
+  <wsdl:message name="EliminarSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="API_GestionBecasSoap">
+    <wsdl:operation name="Listar">
+      <wsdl:input message="tns:ListarSoapIn" />
+      <wsdl:output message="tns:ListarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorEstudiante">
+      <wsdl:input message="tns:ListarPorEstudianteSoapIn" />
+      <wsdl:output message="tns:ListarPorEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipo">
+      <wsdl:input message="tns:ListarPorTipoSoapIn" />
+      <wsdl:output message="tns:ListarPorTipoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipoBeca">
+      <wsdl:input message="tns:ListarPorTipoBecaSoapIn" />
+      <wsdl:output message="tns:ListarPorTipoBecaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="leerPorId">
+      <wsdl:input message="tns:leerPorIdSoapIn" />
+      <wsdl:output message="tns:leerPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Insertar">
+      <wsdl:input message="tns:InsertarSoapIn" />
+      <wsdl:output message="tns:InsertarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <wsdl:input message="tns:ActualizarSoapIn" />
+      <wsdl:output message="tns:ActualizarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Eliminar">
+      <wsdl:input message="tns:EliminarSoapIn" />
+      <wsdl:output message="tns:EliminarSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="API_GestionBecasSoap" type="tns:API_GestionBecasSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Listar">
+      <soap:operation soapAction="http://tempuri.org/Listar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorEstudiante">
+      <soap:operation soapAction="http://tempuri.org/ListarPorEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipo">
+      <soap:operation soapAction="http://tempuri.org/ListarPorTipo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipoBeca">
+      <soap:operation soapAction="http://tempuri.org/ListarPorTipoBeca" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="leerPorId">
+      <soap:operation soapAction="http://tempuri.org/leerPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar">
+      <soap:operation soapAction="http://tempuri.org/Insertar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <soap:operation soapAction="http://tempuri.org/Actualizar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Eliminar">
+      <soap:operation soapAction="http://tempuri.org/Eliminar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="API_GestionBecasSoap12" type="tns:API_GestionBecasSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Listar">
+      <soap12:operation soapAction="http://tempuri.org/Listar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/ListarPorEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipo">
+      <soap12:operation soapAction="http://tempuri.org/ListarPorTipo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPorTipoBeca">
+      <soap12:operation soapAction="http://tempuri.org/ListarPorTipoBeca" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="leerPorId">
+      <soap12:operation soapAction="http://tempuri.org/leerPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insertar">
+      <soap12:operation soapAction="http://tempuri.org/Insertar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <soap12:operation soapAction="http://tempuri.org/Actualizar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Eliminar">
+      <soap12:operation soapAction="http://tempuri.org/Eliminar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="API_GestionBecas">
+    <wsdl:port name="API_GestionBecasSoap" binding="tns:API_GestionBecasSoap">
+      <soap:address location="http://localhost:9090/API_GestionBecas.asmx" />
+    </wsdl:port>
+    <wsdl:port name="API_GestionBecasSoap12" binding="tns:API_GestionBecasSoap12">
+      <soap12:address location="http://localhost:9090/API_GestionBecas.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

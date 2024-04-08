@@ -1,0 +1,80 @@
+﻿@model InterfazPrueba.Models.Becas_Ayudas_Financieras
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Becas_Ayudas_Financieras</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_estudiante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_estudiante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_beca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_beca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.borrado_logico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_borrado_logico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_borrado_logico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estudiantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estudiantes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

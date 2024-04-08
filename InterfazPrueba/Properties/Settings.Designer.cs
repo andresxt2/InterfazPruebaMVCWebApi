@@ -32,5 +32,15 @@ namespace InterfazPrueba.Properties {
                 return ((string)(this["InterfazPrueba_localhost_API_GestionEstudiantes"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionBecas.asmx")]
+        public string InterfazPrueba_ApiBecasWS_API_GestionBecas {
+            get {
+                return ((string)(this["InterfazPrueba_ApiBecasWS_API_GestionBecas"]));
+            }
+        }
     }
 }

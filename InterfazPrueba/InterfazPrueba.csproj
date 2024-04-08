@@ -133,8 +133,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logica\LogicaCRUD.cs" />
+    <Compile Include="Logica\logicaCRUDBecas.cs" />
     <Compile Include="Models\Becas_Ayudas_Financieras.cs" />
     <Compile Include="Models\Estudiante.cs" />
+    <Compile Include="Models\EstudiantesBecasVM.cs" />
     <Compile Include="Models\Morosidad.cs" />
     <Compile Include="Models\Pagos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,6 +146,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Controllers\EstudiantesController.cs" />
+    <Compile Include="Controllers\Becas_Ayudas_FinancierasController.cs" />
+    <Compile Include="Web References\ApiBecasWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\localhost\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,6 +218,19 @@
     <Content Include="Views\Estudiantes\Details.cshtml" />
     <Content Include="Views\Estudiantes\Edit.cshtml" />
     <Content Include="Views\Estudiantes\Index.cshtml" />
+    <Content Include="Views\Becas_Ayudas_Financieras\Create.cshtml" />
+    <Content Include="Views\Becas_Ayudas_Financieras\Delete.cshtml" />
+    <Content Include="Views\Becas_Ayudas_Financieras\Details.cshtml" />
+    <Content Include="Views\Becas_Ayudas_Financieras\Edit.cshtml" />
+    <Content Include="Views\Becas_Ayudas_Financieras\Index.cshtml" />
+    <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
+    <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ApiBecasWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\localhost\API_GestionEstudiantes.wsdl" />
     <Content Include="Web References\localhost\Estudiantes.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -221,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\UIBecas\" />
     <Folder Include="Views\UIEstudiantes\" />
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +279,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:9090/API_GestionBecas.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ApiBecasWS\</RelPath>
+      <UpdateFromURL>http://localhost:9090/API_GestionBecas.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>InterfazPrueba_ApiBecasWS_API_GestionBecas</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:9090/API_GestionEstudiantes.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\localhost\</RelPath>
