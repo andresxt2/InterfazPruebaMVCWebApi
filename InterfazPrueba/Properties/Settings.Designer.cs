@@ -42,5 +42,25 @@ namespace InterfazPrueba.Properties {
                 return ((string)(this["InterfazPrueba_ApiBecasWS_API_GestionBecas"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionMorosidad.asmx")]
+        public string InterfazPrueba_ApiMorosidadWS_API_GestionMorosidad {
+            get {
+                return ((string)(this["InterfazPrueba_ApiMorosidadWS_API_GestionMorosidad"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionPagos.asmx")]
+        public string InterfazPrueba_ApiPagosWS_API_GestionPagos {
+            get {
+                return ((string)(this["InterfazPrueba_ApiPagosWS_API_GestionPagos"]));
+            }
+        }
     }
 }

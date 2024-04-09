@@ -1,0 +1,58 @@
+﻿@model InterfazPrueba.Models.EstudiantesMorosidadesVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Morosidades[0].id_morosidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morosidades[0].Estudiantes.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morosidades[0].semestre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morosidades[0].dias_retraso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morosidades[0].monto_debido)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Morosidades)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_morosidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semestre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dias_retraso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto_debido)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_morosidad }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_morosidad }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_morosidad })
+            </td>
+        </tr>
+    }
+
+</table>

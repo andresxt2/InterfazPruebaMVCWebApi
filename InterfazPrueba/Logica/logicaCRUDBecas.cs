@@ -56,5 +56,21 @@ namespace InterfazPrueba.Logica
             becaWS.semestre = beca.semestre;
             becas.Insertar(becaWS);
         }
+
+        public bool actualizarBeca(Models.Becas_Ayudas_Financieras beca)
+        {
+            ApiBecasWS.Becas_Ayudas_Financieras becaWS = new ApiBecasWS.Becas_Ayudas_Financieras();
+            becaWS.id_beca = beca.id_beca;
+            becaWS.id_estudiante = beca.id_estudiante;
+            becaWS.tipo_beca = beca.tipo_beca;
+            becaWS.monto = beca.monto;
+            becaWS.semestre = beca.semestre;
+            return becas.Actualizar(becaWS);
+        }
+
+        public bool eliminarBeca(int id)
+        {
+            return becas.Eliminar(id);
+        }
     }
 }

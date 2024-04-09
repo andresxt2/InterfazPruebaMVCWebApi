@@ -1,0 +1,58 @@
+﻿@model InterfazPrueba.Models.EstudiantesPagosVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos[0].id_estudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos[0].fecha_pago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos[0].monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos[0].semestre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos[0].estado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Pagos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_pago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semestre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_pago }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_pago }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_pago })
+            </td>
+        </tr>
+    }
+
+</table>

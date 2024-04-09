@@ -14,7 +14,6 @@ namespace InterfazPrueba.Views.UIBecas
 {
     public class Becas_Ayudas_FinancierasController : Controller
     {
-        private InterfazPruebaContext db = new InterfazPruebaContext();
         logicaCRUDBecas logicaCRUDBecas = new logicaCRUDBecas();
         LogicaCRUD logicaEstudiantes = new LogicaCRUD();
 
@@ -42,7 +41,7 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = db.Becas_Ayudas_Financieras.Find(id);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
@@ -53,7 +52,12 @@ namespace InterfazPrueba.Views.UIBecas
         // GET: Becas_Ayudas_Financieras/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDBecas"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            // Preparando el ViewBag para tipo_beca
+            ViewBag.TipoBecaEnBecas = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" });
+
+            // Preparando el ViewBag para semestre
+            ViewBag.SemestreBecas = new SelectList(new List<string> { "2023A", "2023B" });
             return View();
         }
 
@@ -64,24 +68,15 @@ namespace InterfazPrueba.Views.UIBecas
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_estudiante,tipo_beca,monto,semestre")] Becas_Ayudas_Financieras becas_Ayudas_Financieras)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
-                {
-                    // Revisa los mensajes de error para ver qué validaciones están fallando
-                    Console.WriteLine(error.ErrorMessage);
-                }
-                // Considera también inspeccionar el valor de 'becas_Ayudas_Financieras' aquí
-            }
-
-
             if (ModelState.IsValid)
             {
                 logicaCRUDBecas.insertarBeca(becas_Ayudas_Financieras);
                 return RedirectToAction("Index");
             }
-            ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", becas_Ayudas_Financieras.id_estudiante);
+            // Repetir la lógica de ViewBag en caso de retorno por validación fallida.
+            /*ViewBag.TipoBecaEnBecas = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" }, becas_Ayudas_Financieras.tipo_beca);
+            ViewBag.SemestreBecas = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
+            ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", becas_Ayudas_Financieras.id_estudiante);*/
             return View(becas_Ayudas_Financieras);
         }
 
@@ -92,11 +87,15 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = db.Becas_Ayudas_Financieras.Find(id);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SemestreBecasMod = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
+            ViewBag.TipoBecaEnBecasMod = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" }, becas_Ayudas_Financieras.tipo_beca);
+            ViewData["EstudianteIDBecasMod"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
             return View(becas_Ayudas_Financieras);
         }
 
@@ -105,14 +104,21 @@ namespace InterfazPrueba.Views.UIBecas
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_beca,id_estudiante,tipo_beca,monto,semestre,borrado_logico,fecha_borrado_logico,Estudiantes")] Becas_Ayudas_Financieras becas_Ayudas_Financieras)
+        public ActionResult Edit([Bind(Include = "id_beca,id_estudiante,tipo_beca,monto,semestre")] Becas_Ayudas_Financieras becas_Ayudas_Financieras)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(becas_Ayudas_Financieras).State = EntityState.Modified;
-                db.SaveChanges();
+                logicaCRUDBecas.actualizarBeca(becas_Ayudas_Financieras);
+                /*db.Entry(becas_Ayudas_Financieras).State = EntityState.Modified;
+                db.SaveChanges();*/
                 return RedirectToAction("Index");
             }
+         //   ViewBag.TipoBeca = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" },becas_Ayudas_Financieras.tipo_beca);
+
+            // Preparando el ViewBag para semestre
+           // ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
+
+            ViewData["EstudianteIDBecasModificar"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", becas_Ayudas_Financieras.id_estudiante);
             return View(becas_Ayudas_Financieras);
         }
 
@@ -123,7 +129,7 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = db.Becas_Ayudas_Financieras.Find(id);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
@@ -136,19 +142,9 @@ namespace InterfazPrueba.Views.UIBecas
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = db.Becas_Ayudas_Financieras.Find(id);
-            db.Becas_Ayudas_Financieras.Remove(becas_Ayudas_Financieras);
-            db.SaveChanges();
+            logicaCRUDBecas.eliminarBeca(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

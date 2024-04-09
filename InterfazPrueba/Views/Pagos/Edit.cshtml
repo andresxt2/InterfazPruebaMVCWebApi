@@ -1,8 +1,7 @@
-﻿@model InterfazPrueba.Models.Becas_Ayudas_Financieras
+﻿@model InterfazPrueba.Models.Pagos
 
 @{
     ViewBag.Title = "Edit";
-    var semestreList = new SelectList(new[] { "2023A", "2023B" });
 }
 
 <h2>Edit</h2>
@@ -13,25 +12,27 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Becas_Ayudas_Financieras</h4>
+    <h4>Pagos</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.id_beca)
+    @Html.HiddenFor(model => model.id_pago)
+
 
     <div class="form-group">
-        @Html.LabelFor(model => model.id_estudiante, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.id_estudiante, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.id_estudiante, (SelectList)ViewData["EstudianteIDBecasMod"], "-- Seleccione un Estudiante --", new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.id_estudiante, (SelectList)ViewData["EstudianteIDPagosMod"], "-- Seleccionar Estudiante --", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.id_estudiante, "", new { @class = "text-danger" })
         </div>
     </div>
 
 
+
     <div class="form-group">
-        @Html.LabelFor(model => model.tipo_beca, new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.fecha_pago, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.tipo_beca, (SelectList)ViewBag.TipoBecaEnBecasMod, "-- Seleccione una opción --", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.tipo_beca, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.fecha_pago, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.fecha_pago, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -43,21 +44,20 @@
         </div>
     </div>
 
-    <!--
     <div class="form-group">
         @Html.LabelFor(model => model.semestre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.semestre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.semestre, (SelectList)ViewBag.SemestrePagosMod, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.semestre, "", new { @class = "text-danger" })
         </div>
     </div>
-        -->
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.semestre, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="form-group">
+        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.semestre, (SelectList)ViewBag.SemestreBecasMod, "Seleccione", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.semestre, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.estado, (SelectList)ViewBag.EstadoPagosMod,"-- Seleccione --",new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
         </div>
     </div>
 

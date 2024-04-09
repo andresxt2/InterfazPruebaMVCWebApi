@@ -22,5 +22,9 @@ namespace InterfazPrueba.Data
         public System.Data.Entity.DbSet<InterfazPrueba.Models.Estudiante> Estudiantes { get; set; }
 
         public System.Data.Entity.DbSet<InterfazPrueba.Models.Becas_Ayudas_Financieras> Becas_Ayudas_Financieras { get; set; }
+
+        public System.Data.Entity.DbSet<InterfazPrueba.Models.Morosidad> Morosidads { get; set; }
+
+        public System.Data.Entity.DbSet<InterfazPrueba.Models.Pagos> Pagos { get; set; }
     }
 }

@@ -134,9 +134,13 @@
     </Compile>
     <Compile Include="Logica\LogicaCRUD.cs" />
     <Compile Include="Logica\logicaCRUDBecas.cs" />
+    <Compile Include="Logica\LogicaCrudMorosidad.cs" />
+    <Compile Include="Logica\LogicaCRUDPagos.cs" />
     <Compile Include="Models\Becas_Ayudas_Financieras.cs" />
     <Compile Include="Models\Estudiante.cs" />
     <Compile Include="Models\EstudiantesBecasVM.cs" />
+    <Compile Include="Models\EstudiantesMorosidadesVM.cs" />
+    <Compile Include="Models\EstudiantesPagosVM.cs" />
     <Compile Include="Models\Morosidad.cs" />
     <Compile Include="Models\Pagos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,7 +151,19 @@
     </Compile>
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\Becas_Ayudas_FinancierasController.cs" />
+    <Compile Include="Controllers\MorosidadsController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Web References\ApiBecasWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ApiMorosidadWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ApiPagosWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -223,11 +239,37 @@
     <Content Include="Views\Becas_Ayudas_Financieras\Details.cshtml" />
     <Content Include="Views\Becas_Ayudas_Financieras\Edit.cshtml" />
     <Content Include="Views\Becas_Ayudas_Financieras\Index.cshtml" />
+    <Content Include="Views\Morosidads\Create.cshtml" />
+    <Content Include="Views\Morosidads\Delete.cshtml" />
+    <Content Include="Views\Morosidads\Details.cshtml" />
+    <Content Include="Views\Morosidads\Edit.cshtml" />
+    <Content Include="Views\Morosidads\Index.cshtml" />
+    <Content Include="Views\Pagos\Create.cshtml" />
+    <Content Include="Views\Pagos\Delete.cshtml" />
+    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Edit.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
     <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ApiBecasWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ApiMorosidadWS\API_GestionMorosidad.wsdl" />
+    <Content Include="Web References\ApiMorosidadWS\Morosidad.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ApiMorosidadWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ApiPagosWS\API_GestionPagos.wsdl" />
+    <Content Include="Web References\ApiPagosWS\Pagos.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ApiPagosWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -244,6 +286,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\UIBecas\" />
     <Folder Include="Views\UIEstudiantes\" />
+    <Folder Include="Views\UIMorosidad\" />
+    <Folder Include="Views\UIPagos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -300,6 +344,28 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>InterfazPrueba_localhost_API_GestionEstudiantes</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:9090/API_GestionMorosidad.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ApiMorosidadWS\</RelPath>
+      <UpdateFromURL>http://localhost:9090/API_GestionMorosidad.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>InterfazPrueba_ApiMorosidadWS_API_GestionMorosidad</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:9090/API_GestionPagos.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ApiPagosWS\</RelPath>
+      <UpdateFromURL>http://localhost:9090/API_GestionPagos.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>InterfazPrueba_ApiPagosWS_API_GestionPagos</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

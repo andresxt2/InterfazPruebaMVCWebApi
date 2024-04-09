@@ -41,6 +41,8 @@ namespace InterfazPrueba.Views.UIEstudiantes
         // GET: Estudiantes/Create
         public ActionResult Create()
         {
+            ViewBag.ProgramaAcademicoOptions = new SelectList(new List<string> { "Grado", "Posgrado", "Tecnologias" });
+            ViewBag.EstadoMatriculaOptions = new SelectList(new List<string> { "Inactivo", "Activo", "Graduado" });
             return View();
         }
 
@@ -72,6 +74,9 @@ namespace InterfazPrueba.Views.UIEstudiantes
             {
                 return HttpNotFound();
             }
+            ViewBag.ProgramaAcademicoOptions = new SelectList(new List<string> { "Grado", "Posgrado", "Tecnologias" }, estudiante.programa_academico);
+            ViewBag.EstadoMatriculaOptions = new SelectList(new List<string> { "Inactivo", "Activo", "Graduado" }, estudiante.estado_matricula);
+
             return View(estudiante);
         }
 

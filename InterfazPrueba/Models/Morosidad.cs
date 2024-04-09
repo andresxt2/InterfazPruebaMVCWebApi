@@ -16,9 +16,7 @@ namespace InterfazPrueba.Models
         public string semestre { get; set; }
         public int dias_retraso { get; set; }
         public decimal monto_debido { get; set; }
-        public Nullable<bool> borrado_logico { get; set; }
-        public Nullable<System.DateTime> fecha_borrado_logico { get; set; }
 
-        public virtual Estudiantes Estudiantes { get; set; }
+        public Estudiante Estudiantes { get; set; }
     }
 }

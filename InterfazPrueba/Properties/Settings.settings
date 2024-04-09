@@ -8,5 +8,11 @@
     <Setting Name="InterfazPrueba_ApiBecasWS_API_GestionBecas" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:9090/API_GestionBecas.asmx</Value>
     </Setting>
+    <Setting Name="InterfazPrueba_ApiMorosidadWS_API_GestionMorosidad" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:9090/API_GestionMorosidad.asmx</Value>
+    </Setting>
+    <Setting Name="InterfazPrueba_ApiPagosWS_API_GestionPagos" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:9090/API_GestionPagos.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
