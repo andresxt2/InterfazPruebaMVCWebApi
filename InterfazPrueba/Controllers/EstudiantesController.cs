@@ -16,19 +16,33 @@ namespace InterfazPrueba.Views.UIEstudiantes
     public class EstudiantesController : Controller
     {
         LogicaCRUD logicaEstudiantes = new LogicaCRUD();
-        private InterfazPruebaContext db = new InterfazPruebaContext();
+        LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
+
 
         // GET: Estudiantes
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string cedula, string nombre)
         {
             int pageSize = 100;
             int pageNumber = (page ?? 1);
 
-            // Asegúrate de que el método ListarEstudiantes() devuelva un IQueryable o un IEnumerable que pueda ser ordenado
-            var estudiantes = logicaEstudiantes.ListarEstudiantes().OrderBy(e => e.nombre).ToPagedList(pageNumber, pageSize);
+            // Filtra los estudiantes por cédula si se proporciona un valor
+            var estudiantesQuery = logicaCacheEstudiantes.ListarEstudiantesCache();
+
+            if (!string.IsNullOrEmpty(cedula))
+            {
+                estudiantesQuery = estudiantesQuery.Where(e => e.ci_estudiante.Contains(cedula)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                estudiantesQuery = estudiantesQuery.Where(e => e.nombre.Contains(nombre)).ToList();
+            }
+
+            var estudiantes = estudiantesQuery.OrderBy(e => e.nombre).ToPagedList(pageNumber, pageSize);
 
             return View(estudiantes);
         }
+
 
         // GET: Estudiantes/Details/5
         public ActionResult Details(int? id)
@@ -63,6 +77,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
             if (ModelState.IsValid)
             {
                 logicaEstudiantes.crearEstudiante(estudiante);
+                logicaCacheEstudiantes.ActualizarEstudiantesCache();
                 return RedirectToAction("Index");
             }
 
@@ -100,6 +115,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
                 db.Entry(estudiante).State = EntityState.Modified;
                 db.SaveChanges();*/
                 logicaEstudiantes.actualizarEstudiante(estudiante);
+                logicaCacheEstudiantes.ActualizarEstudiantesCache();
                 return RedirectToAction("Index");
             }
             return View(estudiante);
@@ -126,6 +142,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
         public ActionResult DeleteConfirmed(int id)
         {
             logicaEstudiantes.EliminarEstudiante(id);
+            logicaCacheEstudiantes.ActualizarEstudiantesCache();
             return RedirectToAction("Index");
         }
 
