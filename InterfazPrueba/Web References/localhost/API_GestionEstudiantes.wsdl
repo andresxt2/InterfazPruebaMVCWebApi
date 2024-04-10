@@ -84,6 +84,28 @@
           <s:element minOccurs="0" maxOccurs="1" name="Estudiantes" type="tns:Estudiantes" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ListarPaginado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="numeroPagina" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="tamanoPagina" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="terminoBusqueda" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPaginadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPaginadoResult" type="tns:PaginacionResultadoOfEstudiantes" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PaginacionResultadoOfEstudiantes">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfEstudiantes" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalRegistros" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ListarPorPrograma">
         <s:complexType>
           <s:sequence>
@@ -172,6 +194,12 @@
   <wsdl:message name="ListarSoapOut">
     <wsdl:part name="parameters" element="tns:ListarResponse" />
   </wsdl:message>
+  <wsdl:message name="ListarPaginadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPaginado" />
+  </wsdl:message>
+  <wsdl:message name="ListarPaginadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPaginadoResponse" />
+  </wsdl:message>
   <wsdl:message name="ListarPorProgramaSoapIn">
     <wsdl:part name="parameters" element="tns:ListarPorPrograma" />
   </wsdl:message>
@@ -213,6 +241,10 @@
       <wsdl:input message="tns:ListarSoapIn" />
       <wsdl:output message="tns:ListarSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListarPaginado">
+      <wsdl:input message="tns:ListarPaginadoSoapIn" />
+      <wsdl:output message="tns:ListarPaginadoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ListarPorPrograma">
       <wsdl:input message="tns:ListarPorProgramaSoapIn" />
       <wsdl:output message="tns:ListarPorProgramaSoapOut" />
@@ -242,6 +274,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Listar">
       <soap:operation soapAction="http://tempuri.org/Listar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPaginado">
+      <soap:operation soapAction="http://tempuri.org/ListarPaginado" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -308,6 +349,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Listar">
       <soap12:operation soapAction="http://tempuri.org/Listar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPaginado">
+      <soap12:operation soapAction="http://tempuri.org/ListarPaginado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

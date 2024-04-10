@@ -1,59 +1,91 @@
-﻿
-@model InterfazPrueba.Models.EstudiantesBecasVM
+﻿@model InterfazPrueba.Models.EstudiantesBecasVM
+@using PagedList.Mvc;
+@using PagedList; 
 
 @{
-
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
+<link href="~/Sources/paginacion.css" rel="stylesheet" />
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Becas[0].id_beca)
+            @Html.DisplayNameFor(model => model.Becas.FirstOrDefault().id_beca)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Becas[0].Estudiantes.nombre)
+            @Html.DisplayNameFor(model => model.Becas.FirstOrDefault().Estudiantes.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Becas[0].tipo_beca)
+            @Html.DisplayNameFor(model => model.Becas.FirstOrDefault().tipo_beca)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Becas[0].monto)
+            @Html.DisplayNameFor(model => model.Becas.FirstOrDefault().monto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Becas[0].semestre)
+            @Html.DisplayNameFor(model => model.Becas.FirstOrDefault().semestre)
         </th>
-        <th></th>
+        <th>Opciones</th>
     </tr>
 
-@foreach (var item in Model.Becas) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_beca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo_beca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.monto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.semestre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id_beca }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id_beca }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id_beca })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.Becas)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_beca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_beca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.semestre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_beca }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_beca }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_beca })
+            </td>
+        </tr>
+    }
 </table>
+
+<!-- Añadir controles de paginación aquí -->
+@Html.PagedListPager(Model.Becas, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+{
+    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+    DisplayLinkToIndividualPages = true,
+    DisplayPageCountAndCurrentLocation = false,
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+    EllipsesFormat = "&#8230;",
+    LinkToFirstPageFormat = "Primera",
+    LinkToPreviousPageFormat = "Anterior",
+    LinkToNextPageFormat = "Siguiente",
+    LinkToLastPageFormat = "Última",
+    PageCountAndCurrentLocationFormat = "Página {0} de {1}.",
+    ItemSliceAndTotalFormat = "Mostrando {0} a {1} de {2} entradas.",
+    FunctionToDisplayEachPageNumber = null,
+    ClassToApplyToFirstListItemInPager = null,
+    ClassToApplyToLastListItemInPager = null,
+    ContainerDivClasses = new[] { "pagination-container" },
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" },
+})
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}

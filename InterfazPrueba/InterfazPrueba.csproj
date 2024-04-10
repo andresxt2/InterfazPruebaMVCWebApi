@@ -53,6 +53,12 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -141,6 +147,7 @@
     <Compile Include="Models\EstudiantesBecasVM.cs" />
     <Compile Include="Models\EstudiantesMorosidadesVM.cs" />
     <Compile Include="Models\EstudiantesPagosVM.cs" />
+    <Compile Include="Models\EstudiantesViewModelPaginacion.cs" />
     <Compile Include="Models\Morosidad.cs" />
     <Compile Include="Models\Pagos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,7 +158,7 @@
     </Compile>
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\Becas_Ayudas_FinancierasController.cs" />
-    <Compile Include="Controllers\MorosidadsController.cs" />
+    <Compile Include="Controllers\MorosidadesController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Web References\ApiBecasWS\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +198,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -215,6 +223,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Sources\paginacion.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -239,11 +248,11 @@
     <Content Include="Views\Becas_Ayudas_Financieras\Details.cshtml" />
     <Content Include="Views\Becas_Ayudas_Financieras\Edit.cshtml" />
     <Content Include="Views\Becas_Ayudas_Financieras\Index.cshtml" />
-    <Content Include="Views\Morosidads\Create.cshtml" />
-    <Content Include="Views\Morosidads\Delete.cshtml" />
-    <Content Include="Views\Morosidads\Details.cshtml" />
-    <Content Include="Views\Morosidads\Edit.cshtml" />
-    <Content Include="Views\Morosidads\Index.cshtml" />
+    <Content Include="Views\Morosidades\Create.cshtml" />
+    <Content Include="Views\Morosidades\Delete.cshtml" />
+    <Content Include="Views\Morosidades\Details.cshtml" />
+    <Content Include="Views\Morosidades\Edit.cshtml" />
+    <Content Include="Views\Morosidades\Index.cshtml" />
     <Content Include="Views\Pagos\Create.cshtml" />
     <Content Include="Views\Pagos\Delete.cshtml" />
     <Content Include="Views\Pagos\Details.cshtml" />
@@ -277,6 +286,9 @@
     <Content Include="Web References\localhost\Estudiantes.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\localhost\PaginacionResultadoOfEstudiantes.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -284,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\UIBecas\" />
     <Folder Include="Views\UIEstudiantes\" />
     <Folder Include="Views\UIMorosidad\" />

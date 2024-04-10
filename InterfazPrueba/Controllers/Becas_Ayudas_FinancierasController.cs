@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using InterfazPrueba.Data;
 using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
+using PagedList;
 
 namespace InterfazPrueba.Views.UIBecas
 {
@@ -18,20 +19,47 @@ namespace InterfazPrueba.Views.UIBecas
         LogicaCRUD logicaEstudiantes = new LogicaCRUD();
 
         // GET: Becas_Ayudas_Financieras
-        public ActionResult Index(EstudiantesBecasVM EBVM)
+        public ActionResult Index(EstudiantesBecasVM EBVM, int?page)
         {
-          //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
-         //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
-            EBVM.Becas = logicaCRUDBecas.ListarBecas();
+            var pageNumber = page ?? 1;
+            var pageSize = 100; // Cantidad de elementos por página
 
-            //List<Estudiante> estudiantes = new List<Estudiante>();
+            // Obtener la lista de becas de la lógica de negocio
+            var becasList = logicaCRUDBecas.ListarBecas();
 
-            foreach (var item in EBVM.Becas)
+            foreach (var beca in becasList)
             {
-                item.Estudiantes = logicaEstudiantes.BuscarEstudiante(item.id_estudiante);
+                beca.Estudiantes = logicaEstudiantes.BuscarEstudiante(beca.id_estudiante);
             }
 
-            return View(EBVM);
+            // Paginar la lista de becas
+            var becasPaged = becasList.ToPagedList(pageNumber, pageSize);
+
+            // Crear el ViewModel y asignar la lista paginada de becas
+            var viewModel = new EstudiantesBecasVM
+            {
+                Becas = becasPaged
+                // Aquí puedes asignar otras propiedades si es necesario
+            };
+
+            return View(viewModel);
+
+
+            /*  var pageNumber = page ?? 1;
+              var pageSize = 100;
+              //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
+              //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
+              EBVM.Becas = logicaCRUDBecas.ListarBecas();
+
+              //List<Estudiante> estudiantes = new List<Estudiante>();
+
+              foreach (var item in EBVM.Becas)
+              {
+                  item.Estudiantes = logicaEstudiantes.BuscarEstudiante(item.id_estudiante);
+              }
+              var becasPaged = EBVM.Becas.ToPagedList(pageNumber, pageSize);
+
+              return View(EBVM);*/
         }
 
         // GET: Becas_Ayudas_Financieras/Details/5

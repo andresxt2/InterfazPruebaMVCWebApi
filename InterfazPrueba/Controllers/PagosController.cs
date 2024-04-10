@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using InterfazPrueba.Data;
 using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
+using PagedList;
 
 namespace InterfazPrueba.Views.UIPagos
 {
@@ -20,20 +21,32 @@ namespace InterfazPrueba.Views.UIPagos
 
 
         // GET: Pagos
-        public ActionResult Index(EstudiantesPagosVM EPVM)
+
+        //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
+        //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
+        public ActionResult Index(int? page)
         {
-            //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
-            //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
-            EPVM.Pagos = LogicaCRUDPagos.ListarPagos();
+            var pageNumber = page ?? 1;
+            var pageSize = 100; // Cantidad de elementos por página
 
-            //List<Estudiante> estudiantes = new List<Estudiante>();
+            var pagosList = LogicaCRUDPagos.ListarPagos(); // Asegúrate de que esto devuelve una lista
 
-            foreach (var item in EPVM.Pagos)
+            foreach (var pago in pagosList)
             {
-                item.Estudiantes = logicaEstudiantes.BuscarEstudiante(item.id_estudiante);
+                pago.Estudiantes = logicaEstudiantes.BuscarEstudiante(pago.id_estudiante);
             }
 
-            return View(EPVM);
+            // Convertir la lista en una versión paginada
+            var pagosPaged = pagosList.ToPagedList(pageNumber, pageSize);
+
+            // Crear y configurar el ViewModel
+            var viewModel = new EstudiantesPagosVM
+            {
+                Pagos = pagosPaged
+                // Configura otras propiedades si es necesario
+            };
+
+            return View(viewModel);
         }
 
         // GET: Pagos/Details/5

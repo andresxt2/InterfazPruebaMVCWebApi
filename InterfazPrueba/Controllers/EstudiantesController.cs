@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using InterfazPrueba.Data;
 using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
+using PagedList;
 
 namespace InterfazPrueba.Views.UIEstudiantes
 {
@@ -18,9 +19,15 @@ namespace InterfazPrueba.Views.UIEstudiantes
         private InterfazPruebaContext db = new InterfazPruebaContext();
 
         // GET: Estudiantes
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(logicaEstudiantes.ListarEstudiantes());
+            int pageSize = 100;
+            int pageNumber = (page ?? 1);
+
+            // Asegúrate de que el método ListarEstudiantes() devuelva un IQueryable o un IEnumerable que pueda ser ordenado
+            var estudiantes = logicaEstudiantes.ListarEstudiantes().OrderBy(e => e.nombre).ToPagedList(pageNumber, pageSize);
+
+            return View(estudiantes);
         }
 
         // GET: Estudiantes/Details/5

@@ -16,7 +16,7 @@ namespace InterfazPrueba.Logica
             int contador = 0;
             foreach (var morosidadWS in morosidadesWS)
             {
-                if (contador < 20)
+                if (contador < 1000)
                 {
                     Models.Morosidad morosidad = new Models.Morosidad();
                     morosidad.id_morosidad = morosidadWS.id_morosidad;

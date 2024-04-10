@@ -16,7 +16,7 @@ namespace InterfazPrueba.Logica
             int contador = 0;
             foreach (var pagoWS in pagosWS)
             {
-                if (contador < 20)
+                if (contador < 1000)
                 {
                     Models.Pagos pago = new Models.Pagos();
                     pago.id_pago = pagoWS.id_pago;

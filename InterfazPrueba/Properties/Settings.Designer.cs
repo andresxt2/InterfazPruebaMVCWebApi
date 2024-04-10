@@ -26,16 +26,6 @@ namespace InterfazPrueba.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionEstudiantes.asmx")]
-        public string InterfazPrueba_localhost_API_GestionEstudiantes {
-            get {
-                return ((string)(this["InterfazPrueba_localhost_API_GestionEstudiantes"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionBecas.asmx")]
         public string InterfazPrueba_ApiBecasWS_API_GestionBecas {
             get {
@@ -60,6 +50,16 @@ namespace InterfazPrueba.Properties {
         public string InterfazPrueba_ApiPagosWS_API_GestionPagos {
             get {
                 return ((string)(this["InterfazPrueba_ApiPagosWS_API_GestionPagos"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionEstudiantes.asmx")]
+        public string InterfazPrueba_localhost_API_GestionEstudiantes {
+            get {
+                return ((string)(this["InterfazPrueba_localhost_API_GestionEstudiantes"]));
             }
         }
     }

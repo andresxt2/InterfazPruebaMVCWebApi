@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace InterfazPrueba.Models
     {
 
         public SelectList Estudiantes { get; set; }
-        public List<Morosidad> Morosidades { get; set; }
+        public IPagedList<Morosidad> Morosidades { get; set; }
 
         public List<Estudiante> EstudiantesList { get; set; }
     }

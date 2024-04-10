@@ -31,6 +31,8 @@ namespace InterfazPrueba.localhost {
         
         private System.Threading.SendOrPostCallback ListarOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ListarPaginadoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback ListarPorProgramaOperationCompleted;
         
         private System.Threading.SendOrPostCallback ListarPorEstadoMatriculaOperationCompleted;
@@ -85,6 +87,9 @@ namespace InterfazPrueba.localhost {
         public event ListarCompletedEventHandler ListarCompleted;
         
         /// <remarks/>
+        public event ListarPaginadoCompletedEventHandler ListarPaginadoCompleted;
+        
+        /// <remarks/>
         public event ListarPorProgramaCompletedEventHandler ListarPorProgramaCompleted;
         
         /// <remarks/>
@@ -126,6 +131,39 @@ namespace InterfazPrueba.localhost {
             if ((this.ListarCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ListarCompleted(this, new ListarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarPaginado", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public PaginacionResultadoOfEstudiantes ListarPaginado(int numeroPagina, int tamanoPagina, string terminoBusqueda) {
+            object[] results = this.Invoke("ListarPaginado", new object[] {
+                        numeroPagina,
+                        tamanoPagina,
+                        terminoBusqueda});
+            return ((PaginacionResultadoOfEstudiantes)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ListarPaginadoAsync(int numeroPagina, int tamanoPagina, string terminoBusqueda) {
+            this.ListarPaginadoAsync(numeroPagina, tamanoPagina, terminoBusqueda, null);
+        }
+        
+        /// <remarks/>
+        public void ListarPaginadoAsync(int numeroPagina, int tamanoPagina, string terminoBusqueda, object userState) {
+            if ((this.ListarPaginadoOperationCompleted == null)) {
+                this.ListarPaginadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarPaginadoOperationCompleted);
+            }
+            this.InvokeAsync("ListarPaginado", new object[] {
+                        numeroPagina,
+                        tamanoPagina,
+                        terminoBusqueda}, this.ListarPaginadoOperationCompleted, userState);
+        }
+        
+        private void OnListarPaginadoOperationCompleted(object arg) {
+            if ((this.ListarPaginadoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ListarPaginadoCompleted(this, new ListarPaginadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -577,6 +615,39 @@ namespace InterfazPrueba.localhost {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class PaginacionResultadoOfEstudiantes {
+        
+        private Estudiantes[] itemsField;
+        
+        private int totalRegistrosField;
+        
+        /// <remarks/>
+        public Estudiantes[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int TotalRegistros {
+            get {
+                return this.totalRegistrosField;
+            }
+            set {
+                this.totalRegistrosField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class Pagos {
         
         private int id_pagoField;
@@ -819,6 +890,32 @@ namespace InterfazPrueba.localhost {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Estudiantes[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    public delegate void ListarPaginadoCompletedEventHandler(object sender, ListarPaginadoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ListarPaginadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ListarPaginadoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public PaginacionResultadoOfEstudiantes Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((PaginacionResultadoOfEstudiantes)(this.results[0]));
             }
         }
     }

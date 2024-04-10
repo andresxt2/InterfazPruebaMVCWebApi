@@ -9,29 +9,40 @@ using System.Web.Mvc;
 using InterfazPrueba.Data;
 using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
+using PagedList;
 
 namespace InterfazPrueba.Views.UIMorosidad
 {
-    public class MorosidadsController : Controller
+    public class MorosidadesController : Controller
     {
         LogicaCrudMorosidad LogicaCrudMorosidad = new LogicaCrudMorosidad();
         LogicaCRUD logicaEstudiantes = new LogicaCRUD();
 
         // GET: Morosidads
-        public ActionResult Index(EstudiantesMorosidadesVM EMVM)
+        public ActionResult Index(EstudiantesMorosidadesVM EMVM, int? page)
         {
-            //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
-            //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
-            EMVM.Morosidades = LogicaCrudMorosidad.ListarMorosidades();
+            var pageNumber = page ?? 1;
+            var pageSize = 100; // Cantidad de elementos por página
 
-            //List<Estudiante> estudiantes = new List<Estudiante>();
+            // Suponiendo que LogicaCrudMorosidad.ListarMorosidades() devuelve una lista o puede ser convertida a IQueryable
+            var morosidadesList = LogicaCrudMorosidad.ListarMorosidades();
 
-            foreach (var item in EMVM.Morosidades)
+            foreach (var morosidad in morosidadesList)
             {
-                item.Estudiantes = logicaEstudiantes.BuscarEstudiante(item.id_estudiante);
+                morosidad.Estudiantes = logicaEstudiantes.BuscarEstudiante(morosidad.id_estudiante);
             }
 
-            return View(EMVM);
+            // Convertir la lista a una versión paginada
+            var morosidadesPaged = morosidadesList.ToPagedList(pageNumber, pageSize);
+
+            // Crear el ViewModel
+            var viewModel = new EstudiantesMorosidadesVM
+            {
+                Morosidades = morosidadesPaged
+                // Asigna otras propiedades si es necesario
+            };
+
+            return View(viewModel);
         }
 
         // GET: Morosidads/Details/5

@@ -1,0 +1,70 @@
+﻿.pagination-container {
+    text-align: center; /* Center the pagination on the page */
+}
+
+.pagination {
+    display: inline-block; /* Place all pagination elements in line */
+    font-size: 1.1em; /* Slightly larger font size for better readability */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Soft shadow for depth */
+}
+
+.page-item {
+    display: inline; /* Ensure pagination items display inline */
+    margin: 0 5px; /* Space out the page items */
+    transition: transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.page-link {
+    margin: 0;
+    padding: 8px 16px; /* Increase padding for a larger clickable area */
+    background-color: #f8f9fa;
+    color: #007bff;
+    text-align: center;
+    border: 1px solid transparent; /* Hide border by default */
+    border-radius: 50px; /* Rounded edges for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+    text-decoration: none; /* No underline on the links */
+    font-weight: 500; /* Slightly bolder font for better visibility */
+}
+
+    .page-link:hover, .page-link:focus {
+        color: #fff;
+        text-decoration: none;
+        background-color: #17a2b8; /* A different color on hover for contrast */
+        border-color: #117a8b;
+        transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+/* Styles for the active item */
+.page-item.active .page-link {
+    background-color: #28a745; /* More vibrant color for the active page */
+    color: white;
+    border-color: #218838;
+}
+
+/* Styles for disabled item */
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* Add a hover effect to non-disabled items for visual feedback */
+.page-item:not(.disabled):hover .page-link {
+    transform: scale(1.05); /* Slight grow effect on hover */
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* Make the ellipsis look consistent with the page numbers */
+.page-item.disabled.PagedList-skipToNext,
+.page-item.disabled.PagedList-skipToLast,
+.page-item.disabled.PagedList-skipToPrevious,
+.page-item.disabled.PagedList-skipToFirst {
+    font-size: inherit;
+    padding: 8px 12px;
+    background-color: transparent;
+    border: none;
+}

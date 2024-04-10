@@ -16,7 +16,7 @@ namespace InterfazPrueba.Logica
             int contador = 0;
             foreach (var becaWS in becasWS)
             {
-                if (contador < 20)
+                if (contador < 1000)
                 {
                     Models.Becas_Ayudas_Financieras beca = new Models.Becas_Ayudas_Financieras();
                     beca.id_beca = becaWS.id_beca;

@@ -1,5 +1,6 @@
-﻿@model PagedList.IPagedList<InterfazPrueba.Models.Estudiante>
+﻿@model InterfazPrueba.Models.EstudiantesMorosidadesVM
 @using PagedList.Mvc; 
+@using PagedList; 
 
 @{
     ViewBag.Title = "Index";
@@ -13,51 +14,52 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().ci_estudiante)
+            @Html.DisplayNameFor(model => model.Morosidades.FirstOrDefault().id_morosidad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().nombre)
+            @Html.DisplayNameFor(model => model.Morosidades.FirstOrDefault().Estudiantes.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().correo_electronico)
+            @Html.DisplayNameFor(model => model.Morosidades.FirstOrDefault().semestre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().programa_academico)
+            @Html.DisplayNameFor(model => model.Morosidades.FirstOrDefault().dias_retraso)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().estado_matricula)
+            @Html.DisplayNameFor(model => model.Morosidades.FirstOrDefault().monto_debido)
         </th>
         <th>Opciones</th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Morosidades)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ci_estudiante)
+                @Html.DisplayFor(modelItem => item.id_morosidad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.nombre)
+                @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.correo_electronico)
+                @Html.DisplayFor(modelItem => item.semestre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.programa_academico)
+                @Html.DisplayFor(modelItem => item.dias_retraso)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.estado_matricula)
+                @Html.DisplayFor(modelItem => item.monto_debido)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_estudiante }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id_estudiante }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_estudiante })
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_morosidad }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_morosidad }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_morosidad })
             </td>
         </tr>
     }
 </table>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+<!-- Añadir controles de paginación aquí -->
+@Html.PagedListPager(Model.Morosidades, page => Url.Action("Index", new { page }), new PagedListRenderOptions
 {
     DisplayLinkToFirstPage = PagedListDisplayMode.Always,
     DisplayLinkToLastPage = PagedListDisplayMode.Always,
@@ -81,9 +83,3 @@
     UlElementClasses = new[] { "pagination" },
     LiElementClasses = new[] { "page-item" },
 })
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace InterfazPrueba.Logica
 {
@@ -16,7 +17,7 @@ namespace InterfazPrueba.Logica
             int contador = 0;
             foreach (var estudianteWS in estudiantesWS)
             {
-                if (contador < 20) { 
+                if (contador < 1000) { 
                 Models.Estudiante estudiante = new Models.Estudiante();
                 estudiante.id_estudiante = estudianteWS.id_estudiante;
                 estudiante.ci_estudiante = estudianteWS.ci_estudiante;
@@ -48,6 +49,26 @@ namespace InterfazPrueba.Logica
             return estudiante;
         }
 
+    /*  public List <Models.Estudiante> Paginacion(int pagina = 1, int tamanoPagina = 100)
+        {
+            var estudiantesWs = estudiantes.ListarPaginado(pagina, tamanoPagina, null);
+            List<Models.Estudiante> listaEstudiantes = new List<Models.Estudiante>();
+            int contador = 0;
+            foreach (var estudianteWs in estudiantesWs.Items)
+            {
+                Models.Estudiante estudiante = new Models.Estudiante();
+                estudiante.id_estudiante = estudiantesWs.Items[contador].id_estudiante;
+                estudiante.ci_estudiante = estudiantesWs.Items[contador].ci_estudiante;
+                estudiante.nombre = estudiantesWs.Items[contador].nombre;
+                estudiante.correo_electronico = estudiantesWs.Items[contador].correo_electronico;
+                estudiante.programa_academico = estudiantesWs.Items[contador].programa_academico;
+                estudiante.estado_matricula = estudiantesWs.Items[contador].estado_matricula;
+                listaEstudiantes.Add(estudiante);
+                contador++;
+            }
+            return listaEstudiantes;       
+        }*/
+      
         public void crearEstudiante(Models.Estudiante estudiante)
         {
             localhost.Estudiantes estudianteWS = new localhost.Estudiantes();
