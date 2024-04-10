@@ -16,7 +16,7 @@ namespace InterfazPrueba.Views.UIBecas
     public class Becas_Ayudas_FinancierasController : Controller
     {
         logicaCRUDBecas logicaCRUDBecas = new logicaCRUDBecas();
-        LogicaCRUD logicaEstudiantes = new LogicaCRUD();
+        LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
 
         // GET: Becas_Ayudas_Financieras
         public ActionResult Index(EstudiantesBecasVM EBVM, int?page)
@@ -24,12 +24,18 @@ namespace InterfazPrueba.Views.UIBecas
             var pageNumber = page ?? 1;
             var pageSize = 100; // Cantidad de elementos por página
 
+
             // Obtener la lista de becas de la lógica de negocio
             var becasList = logicaCRUDBecas.ListarBecas();
 
+            if (!string.IsNullOrEmpty(EBVM.TipoBecaSeleccionado))
+            {
+                becasList = becasList.Where(e => e.tipo_beca.Equals(EBVM.TipoBecaSeleccionado)).ToList();
+            }
+
             foreach (var beca in becasList)
             {
-                beca.Estudiantes = logicaEstudiantes.BuscarEstudiante(beca.id_estudiante);
+                beca.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(beca.id_estudiante);
             }
 
             // Paginar la lista de becas
@@ -80,7 +86,7 @@ namespace InterfazPrueba.Views.UIBecas
         // GET: Becas_Ayudas_Financieras/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDBecas"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDBecas"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
             // Preparando el ViewBag para tipo_beca
             ViewBag.TipoBecaEnBecas = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" });
 
@@ -123,7 +129,7 @@ namespace InterfazPrueba.Views.UIBecas
 
             ViewBag.SemestreBecasMod = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
             ViewBag.TipoBecaEnBecasMod = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" }, becas_Ayudas_Financieras.tipo_beca);
-            ViewData["EstudianteIDBecasMod"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDBecasMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
             return View(becas_Ayudas_Financieras);
         }
 
@@ -146,7 +152,7 @@ namespace InterfazPrueba.Views.UIBecas
             // Preparando el ViewBag para semestre
            // ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
 
-            ViewData["EstudianteIDBecasModificar"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", becas_Ayudas_Financieras.id_estudiante);
+            ViewData["EstudianteIDBecasModificar"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", becas_Ayudas_Financieras.id_estudiante);
             return View(becas_Ayudas_Financieras);
         }
 

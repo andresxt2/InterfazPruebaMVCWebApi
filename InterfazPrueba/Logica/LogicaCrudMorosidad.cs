@@ -13,11 +13,9 @@ namespace InterfazPrueba.Logica
         {
             List<Models.Morosidad> listaMorosidades = new List<Models.Morosidad>();
             var morosidadesWS = morosidades.Listar();
-            int contador = 0;
             foreach (var morosidadWS in morosidadesWS)
             {
-                if (contador < 1000)
-                {
+
                     Models.Morosidad morosidad = new Models.Morosidad();
                     morosidad.id_morosidad = morosidadWS.id_morosidad;
                     morosidad.id_estudiante = morosidadWS.id_estudiante;
@@ -25,12 +23,6 @@ namespace InterfazPrueba.Logica
                     morosidad.dias_retraso = morosidadWS.dias_retraso;
                     morosidad.monto_debido = morosidadWS.monto_debido;
                     listaMorosidades.Add(morosidad);
-                }
-                else
-                {
-                    break;
-                }
-                contador++;
             }
             return listaMorosidades;
         }

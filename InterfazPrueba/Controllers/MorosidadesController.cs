@@ -16,7 +16,7 @@ namespace InterfazPrueba.Views.UIMorosidad
     public class MorosidadesController : Controller
     {
         LogicaCrudMorosidad LogicaCrudMorosidad = new LogicaCrudMorosidad();
-        LogicaCRUD logicaEstudiantes = new LogicaCRUD();
+        LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
 
         // GET: Morosidads
         public ActionResult Index(EstudiantesMorosidadesVM EMVM, int? page)
@@ -29,7 +29,7 @@ namespace InterfazPrueba.Views.UIMorosidad
 
             foreach (var morosidad in morosidadesList)
             {
-                morosidad.Estudiantes = logicaEstudiantes.BuscarEstudiante(morosidad.id_estudiante);
+                morosidad.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(morosidad.id_estudiante);
             }
 
             // Convertir la lista a una versión paginada
@@ -63,7 +63,7 @@ namespace InterfazPrueba.Views.UIMorosidad
         // GET: Morosidads/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDMorosidad"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDMorosidad"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
             ViewBag.SemestreMorosidad = new SelectList(new List<string> { "2023A", "2023B" });
             return View();
         }
@@ -73,7 +73,7 @@ namespace InterfazPrueba.Views.UIMorosidad
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_estudiante,semestre,dias_retraso,monto_debido,Estudiantes")] Morosidad morosidad)
+        public ActionResult Create([Bind(Include = "id_estudiante,semestre,dias_retraso,monto_debido")] Morosidad morosidad)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             {
                 return HttpNotFound();
             }
-            ViewData["EstudianteIDMorosidadMod"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", morosidad.id_estudiante);
+            ViewData["EstudianteIDMorosidadMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", morosidad.id_estudiante);
             ViewBag.SemestreMorosidadMod = new SelectList(new List<string> { "2023A", "2023B" }, morosidad.semestre);
            // ViewData["Semestre"] = new SelectList(new List<string> { "2023A", "2023B" } , morosidad.semestre);
 

@@ -1,42 +1,51 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Sources/estilohero.css" rel="stylesheet" />
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("CRUD", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("CRUD Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <div class="container">
+        <img src="https://andrestayupanta.neocities.org/imagesMvc/images.jpg" alt="Bullworth College Logo" style="height: 40px; width: auto; margin-right: 10px;">
+        @Html.ActionLink("Bullworth College", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CRUD Estudiantes", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CRUD Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CRUD Pagos", "Index", "Pagos", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("CRUD Morosidades", "Index", "Morosidades", new { area = "" }, new { @class = "nav-link" })</li>
+            </ul>
         </div>
-    </nav>
-    <div class="container body-content">
+    </div>
+</nav>
+
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="container body-content flex-grow-1">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+<footer class="bg-dark text-white">
+    <h4>Sticky footer con Bootstrap</h4>
+</footer>
+
+
 </html>

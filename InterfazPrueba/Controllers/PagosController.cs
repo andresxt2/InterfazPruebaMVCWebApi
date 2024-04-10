@@ -17,23 +17,31 @@ namespace InterfazPrueba.Views.UIPagos
     {
        
         LogicaCRUDPagos LogicaCRUDPagos = new LogicaCRUDPagos();
-        LogicaCRUD logicaEstudiantes = new LogicaCRUD();
+        LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
 
 
         // GET: Pagos
-
-        //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
-        //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
-        public ActionResult Index(int? page)
+        public ActionResult Index(EstudiantesPagosVM EPVM ,int? page)
         {
             var pageNumber = page ?? 1;
             var pageSize = 100; // Cantidad de elementos por página
 
             var pagosList = LogicaCRUDPagos.ListarPagos(); // Asegúrate de que esto devuelve una lista
 
+
+            if (!string.IsNullOrEmpty(EPVM.EstadoPagoSeleccionado))
+            {
+                pagosList = pagosList.Where(e => e.estado.Equals(EPVM.EstadoPagoSeleccionado)).ToList();
+            }
+
+            if (DateTime.TryParse(EPVM.FechaPagoSeleccionado, out DateTime fechaResult))
+            {
+                pagosList = pagosList.Where(s => s.fecha_pago == fechaResult.Date).ToList();
+            }
+
             foreach (var pago in pagosList)
             {
-                pago.Estudiantes = logicaEstudiantes.BuscarEstudiante(pago.id_estudiante);
+                pago.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(pago.id_estudiante);
             }
 
             // Convertir la lista en una versión paginada
@@ -67,7 +75,7 @@ namespace InterfazPrueba.Views.UIPagos
         // GET: Pagos/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDPagos"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDPagos"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
             // Preparando el ViewBag para tipo_beca
             ViewBag.EstadoPagos = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo" });
 
@@ -111,7 +119,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return HttpNotFound();
             }
-            ViewData["EstudianteIDPagosMod"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", pagos.id_estudiante);
+            ViewData["EstudianteIDPagosMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", pagos.id_estudiante);
 
             ViewBag.EstadoPagosMod = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo" }, pagos.estado);
 
@@ -132,12 +140,6 @@ namespace InterfazPrueba.Views.UIPagos
                 LogicaCRUDPagos.actualizarPago(pagos);
                 return RedirectToAction("Index");
             }
-           // ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", pagos.id_estudiante);
-            // Preparando el ViewBag para tipo_beca
-         //   ViewBag.Estado = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo" }, pagos.estado);
-
-            // Preparando el ViewBag para semestre
-           // ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, pagos.semestre);
             return View(pagos);
         }
 

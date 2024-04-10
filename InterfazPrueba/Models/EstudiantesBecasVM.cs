@@ -14,5 +14,7 @@ namespace InterfazPrueba.Models
 
         public List<Estudiante> EstudiantesList { get; set; }
 
+        public string TipoBecaSeleccionado { get; set; }
+
     }
 }

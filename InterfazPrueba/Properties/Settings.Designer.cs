@@ -62,5 +62,15 @@ namespace InterfazPrueba.Properties {
                 return ((string)(this["InterfazPrueba_localhost_API_GestionEstudiantes"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9090/API_GestionResultados.asmx")]
+        public string InterfazPrueba_APIResultadosWS_API_GestionResultados {
+            get {
+                return ((string)(this["InterfazPrueba_APIResultadosWS_API_GestionResultados"]));
+            }
+        }
     }
 }

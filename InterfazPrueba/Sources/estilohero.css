@@ -1,0 +1,16 @@
+﻿
+.hero-image {
+    background-image: url("https://picsum.photos/1280/720");
+    background-repeat: no-repeat;
+    color: #FFF;
+    min-height: 100vh;
+}
+
+.hero-image div {
+    background-color: rgba(0,0,0, .75);
+}
+
+.fixed {
+    position: fixed;
+}
+

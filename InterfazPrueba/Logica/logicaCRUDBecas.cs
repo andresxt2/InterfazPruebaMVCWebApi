@@ -13,11 +13,8 @@ namespace InterfazPrueba.Logica
         {
             List<Models.Becas_Ayudas_Financieras> listaBecas = new List<Models.Becas_Ayudas_Financieras>();
             var becasWS = becas.Listar();
-            int contador = 0;
             foreach (var becaWS in becasWS)
             {
-                if (contador < 1000)
-                {
                     Models.Becas_Ayudas_Financieras beca = new Models.Becas_Ayudas_Financieras();
                     beca.id_beca = becaWS.id_beca;
                     beca.id_estudiante = becaWS.id_estudiante;
@@ -25,12 +22,6 @@ namespace InterfazPrueba.Logica
                     beca.monto = becaWS.monto;
                     beca.semestre = becaWS.semestre;
                     listaBecas.Add(beca);
-                }
-                else
-                {
-                    break;
-                }
-                contador++;
             }
             return listaBecas;
         }

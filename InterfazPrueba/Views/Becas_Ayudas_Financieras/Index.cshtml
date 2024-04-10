@@ -1,10 +1,32 @@
 ﻿@model InterfazPrueba.Models.EstudiantesBecasVM
 @using PagedList.Mvc;
-@using PagedList; 
+@using PagedList;
 
 @{
     ViewBag.Title = "Index";
 }
+
+
+@using (Html.BeginForm("Index", "Becas_Ayudas_Financieras", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group mb-2">
+        <label for="tipoBeca" class="sr-only">Tipo de Beca</label>
+        @Html.DropDownListFor(
+            model => model.TipoBecaSeleccionado,
+            new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Necesidad", Value = "Necesidad" },
+                new SelectListItem { Text = "Merito", Value = "Merito" },
+                new SelectListItem { Text = "Investigacion", Value = "Investigacion" }
+            }, "Value", "Text"),
+            "Selecciona un tipo",
+            new { @class = "form-control", @id = "tipoBeca" }
+        )
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+}
+
+
 
 <h2>Index</h2>
 <link href="~/Sources/paginacion.css" rel="stylesheet" />

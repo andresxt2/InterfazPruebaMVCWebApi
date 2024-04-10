@@ -13,5 +13,9 @@ namespace InterfazPrueba.Models
         public IPagedList<Pagos> Pagos { get; set; }
 
         public List<Estudiante> EstudiantesList { get; set; }
+
+        public string EstadoPagoSeleccionado { get; set; }
+
+        public string FechaPagoSeleccionado { get; set; }
     }
 }

@@ -1,9 +1,33 @@
 ﻿@model InterfazPrueba.Models.EstudiantesPagosVM
-@using PagedList.Mvc; 
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
+
+@using (Html.BeginForm("Index", "Pagos", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group mb-2">
+        <label for="estadoPago" class="sr-only">Estado de Pago</label>
+        @Html.DropDownListFor(
+            model => model.EstadoPagoSeleccionado,
+            new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Completo", Value = "Completo" },
+                new SelectListItem { Text = "Parcial", Value = "Parcial" },
+                new SelectListItem { Text = "Pendiente", Value = "Pendiente" }
+            }, "Value", "Text"),
+            "Selecciona un estado",
+            new { @class = "form-control", @id = "estadoPago" }
+        )
+    </div>
+
+        <p>
+            Fecha de Registro: @Html.TextBoxFor(model => model.FechaPagoSeleccionado, "{0:yyyy-MM-dd}", new { @type = "date" })
+        </p>
+    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+}
+
 
 <h2>Index</h2>
 <link href="~/Sources/paginacion.css" rel="stylesheet" />

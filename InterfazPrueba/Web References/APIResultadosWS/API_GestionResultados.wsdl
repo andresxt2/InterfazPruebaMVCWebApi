@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SPReporteDistribucionBecasPorPrograma">
+        <s:complexType />
+      </s:element>
+      <s:element name="SPReporteDistribucionBecasPorProgramaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SPReporteDistribucionBecasPorProgramaResult" type="tns:ArrayOfReporteDistribucionBecasPorPrograma_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReporteDistribucionBecasPorPrograma_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReporteDistribucionBecasPorPrograma_Result" nillable="true" type="tns:ReporteDistribucionBecasPorPrograma_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReporteDistribucionBecasPorPrograma_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="programa_academico" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total_Becas" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Monto_Total_Becas" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SPReporteEstadoPagos">
+        <s:complexType />
+      </s:element>
+      <s:element name="SPReporteEstadoPagosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SPReporteEstadoPagosResult" type="tns:ArrayOfReporteEstadoPagos_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReporteEstadoPagos_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReporteEstadoPagos_Result" nillable="true" type="tns:ReporteEstadoPagos_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReporteEstadoPagos_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total_Pagos" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Monto_Total" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SPReporteMorosidadPorPrograma">
+        <s:complexType />
+      </s:element>
+      <s:element name="SPReporteMorosidadPorProgramaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SPReporteMorosidadPorProgramaResult" type="tns:ArrayOfReporteMorosidadPorPrograma_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReporteMorosidadPorPrograma_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReporteMorosidadPorPrograma_Result" nillable="true" type="tns:ReporteMorosidadPorPrograma_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReporteMorosidadPorPrograma_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="programa_academico" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total_Casos_Morosidad" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Monto_Total_Deuda" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SPReporteDistribucionBecasPorProgramaSoapIn">
+    <wsdl:part name="parameters" element="tns:SPReporteDistribucionBecasPorPrograma" />
+  </wsdl:message>
+  <wsdl:message name="SPReporteDistribucionBecasPorProgramaSoapOut">
+    <wsdl:part name="parameters" element="tns:SPReporteDistribucionBecasPorProgramaResponse" />
+  </wsdl:message>
+  <wsdl:message name="SPReporteEstadoPagosSoapIn">
+    <wsdl:part name="parameters" element="tns:SPReporteEstadoPagos" />
+  </wsdl:message>
+  <wsdl:message name="SPReporteEstadoPagosSoapOut">
+    <wsdl:part name="parameters" element="tns:SPReporteEstadoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="SPReporteMorosidadPorProgramaSoapIn">
+    <wsdl:part name="parameters" element="tns:SPReporteMorosidadPorPrograma" />
+  </wsdl:message>
+  <wsdl:message name="SPReporteMorosidadPorProgramaSoapOut">
+    <wsdl:part name="parameters" element="tns:SPReporteMorosidadPorProgramaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="API_GestionResultadosSoap">
+    <wsdl:operation name="SPReporteDistribucionBecasPorPrograma">
+      <wsdl:input message="tns:SPReporteDistribucionBecasPorProgramaSoapIn" />
+      <wsdl:output message="tns:SPReporteDistribucionBecasPorProgramaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteEstadoPagos">
+      <wsdl:input message="tns:SPReporteEstadoPagosSoapIn" />
+      <wsdl:output message="tns:SPReporteEstadoPagosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteMorosidadPorPrograma">
+      <wsdl:input message="tns:SPReporteMorosidadPorProgramaSoapIn" />
+      <wsdl:output message="tns:SPReporteMorosidadPorProgramaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="API_GestionResultadosSoap" type="tns:API_GestionResultadosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SPReporteDistribucionBecasPorPrograma">
+      <soap:operation soapAction="http://tempuri.org/SPReporteDistribucionBecasPorPrograma" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteEstadoPagos">
+      <soap:operation soapAction="http://tempuri.org/SPReporteEstadoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteMorosidadPorPrograma">
+      <soap:operation soapAction="http://tempuri.org/SPReporteMorosidadPorPrograma" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="API_GestionResultadosSoap12" type="tns:API_GestionResultadosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SPReporteDistribucionBecasPorPrograma">
+      <soap12:operation soapAction="http://tempuri.org/SPReporteDistribucionBecasPorPrograma" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteEstadoPagos">
+      <soap12:operation soapAction="http://tempuri.org/SPReporteEstadoPagos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SPReporteMorosidadPorPrograma">
+      <soap12:operation soapAction="http://tempuri.org/SPReporteMorosidadPorPrograma" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="API_GestionResultados">
+    <wsdl:port name="API_GestionResultadosSoap" binding="tns:API_GestionResultadosSoap">
+      <soap:address location="http://localhost:9090/API_GestionResultados.asmx" />
+    </wsdl:port>
+    <wsdl:port name="API_GestionResultadosSoap12" binding="tns:API_GestionResultadosSoap12">
+      <soap12:address location="http://localhost:9090/API_GestionResultados.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
