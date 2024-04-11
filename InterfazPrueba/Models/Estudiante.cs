@@ -16,6 +16,10 @@ namespace InterfazPrueba.Models
 
         public string ci_estudiante { get; set; }
         public string nombre { get; set; }
+
+
+        [Required(ErrorMessage = "El campo Email es obligatorio.")]
+        [EmailAddress(ErrorMessage = "Ingresa un formato de correo electrónico válido.")]
         public string correo_electronico { get; set; }
         public string programa_academico { get; set; }
         public string estado_matricula { get; set; }

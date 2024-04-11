@@ -17,6 +17,7 @@ namespace InterfazPrueba.Views.UIBecas
     {
         logicaCRUDBecas logicaCRUDBecas = new logicaCRUDBecas();
         LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
+        logicaCacheBecas logicaCacheBecas = new logicaCacheBecas();
 
         // GET: Becas_Ayudas_Financieras
         public ActionResult Index(EstudiantesBecasVM EBVM, int?page)
@@ -26,16 +27,39 @@ namespace InterfazPrueba.Views.UIBecas
 
 
             // Obtener la lista de becas de la lógica de negocio
-            var becasList = logicaCRUDBecas.ListarBecas();
+            var becasList = logicaCacheBecas.ListarBecasCache().ToList();
 
             if (!string.IsNullOrEmpty(EBVM.TipoBecaSeleccionado))
             {
                 becasList = becasList.Where(e => e.tipo_beca.Equals(EBVM.TipoBecaSeleccionado)).ToList();
             }
 
+            // Obtener los IDs de los estudiantes asociados a las becas
+            var idsEstudiantes = becasList.Select(beca => beca.id_estudiante).Distinct().ToList();
+
+            // Obtener todos los estudiantes asociados a las becas en una sola consulta
+            var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
+                .ToDictionary(estudiante => estudiante.id_estudiante);
+
+            // Asignar los estudiantes correspondientes a las becas
+            foreach (var beca in becasList)
+            {
+                Estudiante estudiante;
+                if (estudiantesDict.TryGetValue(beca.id_estudiante, out estudiante))
+                {
+                    beca.Estudiantes = estudiante;
+                }
+            }
+
+            /*
             foreach (var beca in becasList)
             {
                 beca.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(beca.id_estudiante);
+            }*/
+
+            if (!string.IsNullOrEmpty(EBVM.NombreEstudianteBuscado))
+            {
+                becasList = becasList.Where(e => e.Estudiantes != null && e.Estudiantes.nombre.Contains(EBVM.NombreEstudianteBuscado)).ToList();
             }
 
             // Paginar la lista de becas
@@ -50,22 +74,6 @@ namespace InterfazPrueba.Views.UIBecas
 
             return View(viewModel);
 
-
-            /*  var pageNumber = page ?? 1;
-              var pageSize = 100;
-              //  IQueryable<string> EstudianteQuery = (IQueryable<string>)logicaEstudiantes.ListarEstudiantes().OrderBy(m => m.nombre).Select(m => m.nombre);
-              //   EBVM.Estudiantes = new SelectList(EstudianteQuery.Distinct().ToList());
-              EBVM.Becas = logicaCRUDBecas.ListarBecas();
-
-              //List<Estudiante> estudiantes = new List<Estudiante>();
-
-              foreach (var item in EBVM.Becas)
-              {
-                  item.Estudiantes = logicaEstudiantes.BuscarEstudiante(item.id_estudiante);
-              }
-              var becasPaged = EBVM.Becas.ToPagedList(pageNumber, pageSize);
-
-              return View(EBVM);*/
         }
 
         // GET: Becas_Ayudas_Financieras/Details/5
@@ -75,7 +83,7 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCacheBecas.ListarCacheBecaPorId(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
@@ -105,6 +113,7 @@ namespace InterfazPrueba.Views.UIBecas
             if (ModelState.IsValid)
             {
                 logicaCRUDBecas.insertarBeca(becas_Ayudas_Financieras);
+                logicaCacheBecas.ActualizarBecasCache();
                 return RedirectToAction("Index");
             }
             // Repetir la lógica de ViewBag en caso de retorno por validación fallida.
@@ -121,7 +130,7 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCacheBecas.ListarCacheBecaPorId(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
@@ -143,8 +152,7 @@ namespace InterfazPrueba.Views.UIBecas
             if (ModelState.IsValid)
             {
                 logicaCRUDBecas.actualizarBeca(becas_Ayudas_Financieras);
-                /*db.Entry(becas_Ayudas_Financieras).State = EntityState.Modified;
-                db.SaveChanges();*/
+                logicaCacheBecas.ActualizarBecasCache();
                 return RedirectToAction("Index");
             }
          //   ViewBag.TipoBeca = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" },becas_Ayudas_Financieras.tipo_beca);
@@ -163,7 +171,7 @@ namespace InterfazPrueba.Views.UIBecas
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCRUDBecas.Becas_Ayudas_Financieras(id.Value);
+            Becas_Ayudas_Financieras becas_Ayudas_Financieras = logicaCacheBecas.ListarCacheBecaPorId(id.Value);
             if (becas_Ayudas_Financieras == null)
             {
                 return HttpNotFound();
@@ -177,6 +185,7 @@ namespace InterfazPrueba.Views.UIBecas
         public ActionResult DeleteConfirmed(int id)
         {
             logicaCRUDBecas.eliminarBeca(id);
+            logicaCacheBecas.ActualizarBecasCache();
             return RedirectToAction("Index");
         }
 

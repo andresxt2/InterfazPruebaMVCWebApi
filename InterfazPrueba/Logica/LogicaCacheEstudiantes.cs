@@ -27,18 +27,23 @@ namespace InterfazPrueba.Logica
                     correo_electronico = apiEstudiante.correo_electronico,
                     programa_academico = apiEstudiante.programa_academico,
                     estado_matricula = apiEstudiante.estado_matricula
-                }).ToList();
-
+                }).OrderByDescending(e => e.id_estudiante).ToList();
                 //cache
                 cache.Set(cacheKey, estudiantesCache, DateTimeOffset.UtcNow.AddMinutes(40)); // Asumiendo cacheDuration de 30 minutos
 
             }
-            return estudiantesCache;
+
+            return estudiantesCache.OrderByDescending(x => x.id_estudiante).ToList();
         }
 
         public Models.Estudiante ListarCacheEstudiantePorId(int id)
         {
             return ListarEstudiantesCache().FirstOrDefault(e => e.id_estudiante == id);
+        }
+
+        public Models.Estudiante ListarCacheEstudiantePorNombre (string nombre)
+        {
+            return ListarEstudiantesCache().FirstOrDefault(e => e.nombre == nombre);
         }
 
         private void ActualizarCache<T>(string cacheKey, Func<List<T>> obtenerDatosDesdeApi)
@@ -60,5 +65,12 @@ namespace InterfazPrueba.Logica
                 estado_matricula = apiEstudiante.estado_matricula
             }).ToList());
         }
+
+        public List<Models.Estudiante> ListarCacheEstudiantePorIds(List<int> id)
+        {
+            return ListarEstudiantesCache().Where(e => id.Contains(e.id_estudiante)).ToList();
+        }
+
+
     }
 }

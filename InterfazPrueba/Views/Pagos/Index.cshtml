@@ -24,6 +24,13 @@
         )
     </div>
 
+
+    <!-- Campo de búsqueda por nombre de estudiante -->
+    <div class="form-group mb-2">
+        <label for="NombreEstudiante" class="sr-only">Nombre del Estudiante</label>
+        @Html.TextBoxFor(model => model.NombreEstudianteBuscado, new { @class = "form-control", @placeholder = "Buscar por nombre", @id = "NombreEstudiante" })
+    </div>
+
     <p>
         Fecha de Pago: @Html.TextBoxFor(model => model.FechaPagoSeleccionado, "{0:yyyy-MM-dd}", new { @type = "date" })
     </p>

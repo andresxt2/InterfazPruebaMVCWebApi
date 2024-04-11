@@ -24,6 +24,13 @@
             new { @class = "form-control", @id = "tipoBeca" }
         )
     </div>
+
+    <!-- Campo de búsqueda por nombre de estudiante -->
+    <div class="form-group mb-2">
+        <label for="NombreEstudiante" class="sr-only">Nombre del Estudiante</label>
+        @Html.TextBoxFor(model => model.NombreEstudianteBuscado, new { @class = "form-control", @placeholder = "Buscar por nombre", @id = "NombreEstudiante" })
+    </div>
+
     <button type="submit" class="btn btn-primary mb-2">Buscar</button>
 }
 

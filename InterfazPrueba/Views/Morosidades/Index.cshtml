@@ -7,6 +7,21 @@
 }
 
 <h2>Index</h2>
+
+@using (Html.BeginForm("Index", "Morosidades", FormMethod.Get, new { @class = "form-inline" }))
+{
+
+    <!-- Campo de búsqueda por nombre de estudiante -->
+    <div class="form-group mb-2">
+        <label for="NombreEstudiante" class="sr-only">Nombre del Estudiante</label>
+        @Html.TextBoxFor(model => model.NombreEstudianteBuscado, new { @class = "form-control", @placeholder = "Buscar por nombre", @id = "NombreEstudiante" })
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+}
+
+
+
 <link href="~/Sources/paginacion.css" rel="stylesheet" />
 
 <!-- Añadir controles de paginación aquí -->

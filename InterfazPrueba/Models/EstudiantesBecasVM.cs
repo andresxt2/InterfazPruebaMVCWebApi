@@ -16,5 +16,7 @@ namespace InterfazPrueba.Models
 
         public string TipoBecaSeleccionado { get; set; }
 
+        public string NombreEstudianteBuscado { get; set; } // Agrega esta línea
+
     }
 }

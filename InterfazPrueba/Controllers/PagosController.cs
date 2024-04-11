@@ -18,6 +18,7 @@ namespace InterfazPrueba.Views.UIPagos
        
         LogicaCRUDPagos LogicaCRUDPagos = new LogicaCRUDPagos();
         LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
+        LogicaCachePagos LogicaCachePagos = new LogicaCachePagos();
 
 
         // GET: Pagos
@@ -26,7 +27,7 @@ namespace InterfazPrueba.Views.UIPagos
             var pageNumber = page ?? 1;
             var pageSize = 100; // Cantidad de elementos por página
 
-            var pagosList = LogicaCRUDPagos.ListarPagos(); // Asegúrate de que esto devuelve una lista
+            var pagosList = LogicaCachePagos.ListarPagosCache(); // Asegúrate de que esto devuelve una lista
 
 
             if (!string.IsNullOrEmpty(EPVM.EstadoPagoSeleccionado))
@@ -39,10 +40,34 @@ namespace InterfazPrueba.Views.UIPagos
                 pagosList = pagosList.Where(s => s.fecha_pago == fechaResult.Date).ToList();
             }
 
+            // Obtener todos los IDs de estudiante únicos de los pagos
+            var idsEstudiantes = pagosList.Select(p => p.id_estudiante).Distinct().ToList();
+
+            // Obtener todos los estudiantes asociados a estos IDs
+            var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
+                .ToDictionary(est => est.id_estudiante);
+
+            // Asignar estudiantes a cada pago
             foreach (var pago in pagosList)
             {
-                pago.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(pago.id_estudiante);
+                if (estudiantesDict.TryGetValue(pago.id_estudiante, out var estudiante))
+                {
+                    pago.Estudiantes = estudiante;
+                }
             }
+
+
+            /*foreach (var pago in pagosList)
+            {
+                pago.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(pago.id_estudiante);
+            }*/
+
+            // Asegúrate de que solo se intenta acceder a la propiedad nombre si Estudiantes no es null.
+            if (!string.IsNullOrEmpty(EPVM.NombreEstudianteBuscado))
+            {
+                pagosList = pagosList.Where(e => e.Estudiantes != null && e.Estudiantes.nombre.Contains(EPVM.NombreEstudianteBuscado)).ToList();
+            }
+
 
             // Convertir la lista en una versión paginada
             var pagosPaged = pagosList.ToPagedList(pageNumber, pageSize);
@@ -64,7 +89,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCRUDPagos.PagoPorId(id.Value);
+            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();
@@ -95,6 +120,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
             //
                 LogicaCRUDPagos.insertarPago(pagos);
+                LogicaCachePagos.ActualizarPagosCache();
                 return RedirectToAction("Index");
             }
 
@@ -114,7 +140,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCRUDPagos.PagoPorId(id.Value);
+            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();
@@ -138,6 +164,7 @@ namespace InterfazPrueba.Views.UIPagos
             if (ModelState.IsValid)
             {
                 LogicaCRUDPagos.actualizarPago(pagos);
+                LogicaCachePagos.ActualizarPagosCache();
                 return RedirectToAction("Index");
             }
             return View(pagos);
@@ -150,7 +177,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCRUDPagos.PagoPorId(id.Value);
+            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();
@@ -164,6 +191,7 @@ namespace InterfazPrueba.Views.UIPagos
         public ActionResult DeleteConfirmed(int id)
         {
             LogicaCRUDPagos.eliminarPago(id);
+            LogicaCachePagos.ActualizarPagosCache();
             return RedirectToAction("Index");
         }
 

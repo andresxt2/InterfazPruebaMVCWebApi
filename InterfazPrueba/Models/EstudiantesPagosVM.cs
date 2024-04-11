@@ -17,5 +17,7 @@ namespace InterfazPrueba.Models
         public string EstadoPagoSeleccionado { get; set; }
 
         public string FechaPagoSeleccionado { get; set; }
+
+        public string NombreEstudianteBuscado { get; set; } // Agrega esta línea
     }
 }

@@ -14,5 +14,7 @@ namespace InterfazPrueba.Models
         public IPagedList<Morosidad> Morosidades { get; set; }
 
         public List<Estudiante> EstudiantesList { get; set; }
+
+        public string NombreEstudianteBuscado { get; set; } // Agrega esta línea
     }
 }

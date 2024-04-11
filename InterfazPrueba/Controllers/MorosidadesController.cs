@@ -15,8 +15,9 @@ namespace InterfazPrueba.Views.UIMorosidad
 {
     public class MorosidadesController : Controller
     {
-        LogicaCrudMorosidad LogicaCrudMorosidad = new LogicaCrudMorosidad();
+       LogicaCrudMorosidad LogicaCrudMorosidad = new LogicaCrudMorosidad();
         LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
+        logicaCacheMorosidades logicaCacheMorosidades = new logicaCacheMorosidades();
 
         // GET: Morosidads
         public ActionResult Index(EstudiantesMorosidadesVM EMVM, int? page)
@@ -25,15 +26,38 @@ namespace InterfazPrueba.Views.UIMorosidad
             var pageSize = 100; // Cantidad de elementos por página
 
             // Suponiendo que LogicaCrudMorosidad.ListarMorosidades() devuelve una lista o puede ser convertida a IQueryable
-            var morosidadesList = LogicaCrudMorosidad.ListarMorosidades();
+            var morosidadesList = logicaCacheMorosidades.ListarMorosidadesCache();
 
+            // Obtener todos los IDs de estudiante únicos de las morosidades
+            var idsEstudiantes = morosidadesList.Select(m => m.id_estudiante).Distinct().ToList();
+
+            // Obtener todos los estudiantes asociados a estos IDs
+            var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
+                .ToDictionary(est => est.id_estudiante);
+
+            // Asignar estudiantes a cada morosidad
             foreach (var morosidad in morosidadesList)
             {
+                if (estudiantesDict.TryGetValue(morosidad.id_estudiante, out var estudiante))
+                {
+                    morosidad.Estudiantes = estudiante;
+                }
+            }
+
+
+            /*foreach (var morosidad in morosidadesList)
+            {
                 morosidad.Estudiantes = logicaCacheEstudiantes.ListarCacheEstudiantePorId(morosidad.id_estudiante);
+            }*/
+
+            if (!string.IsNullOrEmpty(EMVM.NombreEstudianteBuscado))
+            {
+                morosidadesList = morosidadesList.Where(e => e.Estudiantes != null && e.Estudiantes.nombre.Contains(EMVM.NombreEstudianteBuscado)).ToList();
             }
 
             // Convertir la lista a una versión paginada
             var morosidadesPaged = morosidadesList.ToPagedList(pageNumber, pageSize);
+
 
             // Crear el ViewModel
             var viewModel = new EstudiantesMorosidadesVM
@@ -52,7 +76,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Morosidad morosidad = LogicaCrudMorosidad.MorosidadPorId(id.Value);
+            Morosidad morosidad = logicaCacheMorosidades.ListarCacheMorosidadPorId(id.Value);
             if (morosidad == null)
             {
                 return HttpNotFound();
@@ -78,6 +102,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             if (ModelState.IsValid)
             {
                 LogicaCrudMorosidad.insertarMorosidad(morosidad);
+                logicaCacheMorosidades.ActualizarMorosidadesCache();
                 return RedirectToAction("Index");
             }
           
@@ -91,7 +116,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Morosidad morosidad = LogicaCrudMorosidad.MorosidadPorId(id.Value);
+            Morosidad morosidad = logicaCacheMorosidades.ListarCacheMorosidadPorId(id.Value);
             if (morosidad == null)
             {
                 return HttpNotFound();
@@ -113,6 +138,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             if (ModelState.IsValid)
             {
                 LogicaCrudMorosidad.actualizarMorosidad(morosidad);
+                logicaCacheMorosidades.ActualizarMorosidadesCache();
                 return RedirectToAction("Index");
             }
            /* ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, morosidad.semestre);
@@ -128,7 +154,7 @@ namespace InterfazPrueba.Views.UIMorosidad
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Morosidad morosidad = LogicaCrudMorosidad.MorosidadPorId(id.Value);
+            Morosidad morosidad = logicaCacheMorosidades.ListarCacheMorosidadPorId(id.Value);
             if (morosidad == null)
             {
                 return HttpNotFound();
@@ -142,6 +168,7 @@ namespace InterfazPrueba.Views.UIMorosidad
         public ActionResult DeleteConfirmed(int id)
         {
             LogicaCrudMorosidad.eliminarMorosidad(id);
+            logicaCacheMorosidades.ActualizarMorosidadesCache();
             return RedirectToAction("Index");
         }
 

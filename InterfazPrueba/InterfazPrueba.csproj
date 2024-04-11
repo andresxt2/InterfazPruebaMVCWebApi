@@ -142,7 +142,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logica\logicaCacheBecas.cs" />
     <Compile Include="Logica\LogicaCacheEstudiantes.cs" />
+    <Compile Include="Logica\logicaCacheMorosidades.cs" />
+    <Compile Include="Logica\LogicaCachePagos.cs" />
     <Compile Include="Logica\LogicaCRUD.cs" />
     <Compile Include="Logica\logicaCRUDBecas.cs" />
     <Compile Include="Logica\LogicaCrudMorosidad.cs" />

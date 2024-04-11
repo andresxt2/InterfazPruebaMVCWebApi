@@ -38,7 +38,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
                 estudiantesQuery = estudiantesQuery.Where(e => e.nombre.Contains(nombre)).ToList();
             }
 
-            var estudiantes = estudiantesQuery.OrderBy(e => e.nombre).ToPagedList(pageNumber, pageSize);
+            var estudiantes = estudiantesQuery.ToPagedList(pageNumber, pageSize);
 
             return View(estudiantes);
         }
