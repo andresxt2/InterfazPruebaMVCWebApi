@@ -6,75 +6,24 @@
 }
 
 
-    <h2>Index</h2>
-    <link href="~/Sources/paginacion.css" rel="stylesheet" />
+<h2>Index</h2>
+<link href="~/Sources/paginacion.css" rel="stylesheet" />
 
 
-    @using (Html.BeginForm("Index", "Estudiantes", FormMethod.Get, new { @class = "form-inline" }))
-    {
-        <div class="form-group mb-2">
-            <label for="nombre" class="sr-only">Nombre</label>
-            @Html.TextBox("nombre", null, new { @class = "form-control", @placeholder = "Nombre" })
-        </div>
-        <div class="form-group mb-2">
-            <label for="cedula" class="sr-only">Cédula</label>
-            @Html.TextBox("cedula", null, new { @class = "form-control", @placeholder = "Cédula" })
-        </div>
-        <button type="submit" class="btn btn-primary mb-2 mt-1">Buscar</button>
-    }
+@using (Html.BeginForm("Index", "Estudiantes", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group mb-2">
+        <label for="nombre" class="sr-only">Nombre</label>
+        @Html.TextBox("nombre", null, new { @class = "form-control", @placeholder = "Nombre" })
+    </div>
+    <div class="form-group mb-2">
+        <label for="cedula" class="sr-only">Cédula</label>
+        @Html.TextBox("cedula", null, new { @class = "form-control", @placeholder = "Cédula" })
+    </div>
+    <button type="submit" class="btn btn-primary mb-2 mt-1">Buscar</button>
+}
 
 
-
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ci_estudiante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().correo_electronico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().programa_academico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().estado_matricula)
-            </th>
-            <th>Opciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ci_estudiante)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.correo_electronico)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.programa_academico)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado_matricula)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_estudiante }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_estudiante }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_estudiante })
-                </td>
-            </tr>
-        }
-    </table>
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
 {
@@ -100,6 +49,56 @@
     UlElementClasses = new[] { "pagination" },
     LiElementClasses = new[] { "page-item" },
 })
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ci_estudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().correo_electronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().programa_academico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().estado_matricula)
+        </th>
+        <th>Opciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ci_estudiante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo_electronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.programa_academico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado_matricula)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_estudiante }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_estudiante }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_estudiante })
+            </td>
+        </tr>
+    }
+</table>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

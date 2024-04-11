@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace InterfazPrueba.localhost {
+namespace InterfazPrueba.ApiEstudiantesWS {
     using System.Diagnostics;
     using System;
     using System.Xml.Serialization;

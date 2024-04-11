@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InterfazPrueba.Logica;
+using InterfazPrueba.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +10,25 @@ namespace InterfazPrueba.Controllers
 {
     public class HomeController : Controller
     {
+        private LogicaResultados logicaResultados = new LogicaResultados();
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
-        public ActionResult WebForm()
+        public ActionResult Resultados()
         {
-            // Lógica para procesar los datos enviados desde el formulario
-            // Puedes acceder a los datos enviados a través de Request.Form o mediante parámetros del método
-            // Por ejemplo: string valor = Request.Form["nombreDelCampo"];
-            // O: public ActionResult WebForm(string parametro1, int parametro2)
-            // Aquí puedes realizar las operaciones necesarias, como guardar en la base de datos, enviar correos electrónicos, etc.
+            var estadoPagos = logicaResultados.ListarEstadoPagos();
+            var morosidadPorPrograma = logicaResultados.ListarMorosidadPorPrograma();
 
-            // Por ahora, simplemente redireccionamos a una vista de confirmación o a la página de inicio
-            return View();
+            var model = new SPResultadosModel
+            {
+                // Suponiendo que tienes un ViewModel que pueda contener estas listas
+                EstadoPagos = estadoPagos,
+                MorosidadPorPrograma = morosidadPorPrograma
+            };
+
+            return View(model);
         }
 
         public ActionResult About()

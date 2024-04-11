@@ -1,4 +1,4 @@
-﻿using InterfazPrueba.localhost;
+﻿using InterfazPrueba.ApiEstudiantesWS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

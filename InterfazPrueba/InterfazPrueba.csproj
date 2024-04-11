@@ -147,6 +147,7 @@
     <Compile Include="Logica\logicaCRUDBecas.cs" />
     <Compile Include="Logica\LogicaCrudMorosidad.cs" />
     <Compile Include="Logica\LogicaCRUDPagos.cs" />
+    <Compile Include="Logica\LogicaResultados.cs" />
     <Compile Include="Models\Becas_Ayudas_Financieras.cs" />
     <Compile Include="Models\Estudiante.cs" />
     <Compile Include="Models\EstudiantesBecasVM.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Models\EstudiantesViewModelPaginacion.cs" />
     <Compile Include="Models\Morosidad.cs" />
     <Compile Include="Models\Pagos.cs" />
+    <Compile Include="Models\SPResultadosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -185,7 +187,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\localhost\Reference.cs">
+    <Compile Include="Web References\ApiEstudiantesWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -269,6 +271,7 @@
     <Content Include="Views\Pagos\Details.cshtml" />
     <Content Include="Views\Pagos\Edit.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Home\Resultados.cshtml" />
     <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -276,6 +279,12 @@
     <Content Include="Web References\ApiBecasWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\ApiEstudiantesWS\Estudiantes.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ApiEstudiantesWS\PaginacionResultadoOfEstudiantes.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\ApiMorosidadWS\API_GestionMorosidad.wsdl" />
     <Content Include="Web References\ApiMorosidadWS\Morosidad.datasource">
@@ -307,14 +316,8 @@
     <Content Include="Web References\APIResultadosWS\ReporteMorosidadPorPrograma_Result.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web References\localhost\API_GestionEstudiantes.wsdl" />
-    <Content Include="Web References\localhost\Estudiantes.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\localhost\PaginacionResultadoOfEstudiantes.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\localhost\Reference.map">
+    <None Include="Web References\ApiEstudiantesWS\API_GestionEstudiantes.wsdl" />
+    <Content Include="Web References\ApiEstudiantesWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -374,7 +377,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:9090/API_GestionEstudiantes.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\localhost\</RelPath>
+      <RelPath>Web References\ApiEstudiantesWS\</RelPath>
       <UpdateFromURL>http://localhost:9090/API_GestionEstudiantes.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>

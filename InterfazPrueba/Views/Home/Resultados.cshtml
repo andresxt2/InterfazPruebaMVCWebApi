@@ -1,0 +1,45 @@
+﻿@model InterfazPrueba.Models.SPResultadosModel
+
+<h2>Reportes</h2>
+
+<h3 class="mt-2">Estado de Pagos</h3>
+<table class="table">
+    <thead>
+        <tr class="p-2">
+            <th>Estado</th>
+            <th>Total Pagos</th>
+            <th>Monto Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EstadoPagos)
+        {
+            <tr class="p-2">
+                <td>@item.estado</td>
+                <td>@item.Total_Pagos</td>
+                <td>$ @item.Monto_Total</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 class="mt-2">Morosidad por Programa</h3>
+<table class="table mt-2">
+    <thead>
+        <tr class="p-2">
+            <th>Programa Académico</th>
+            <th>Total Casos Morosidad</th>
+            <th>Monto Total Deuda</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MorosidadPorPrograma)
+        {
+            <tr class="p-2">
+                <td>@item.programa_academico</td>
+                <td>@item.Total_Casos_Morosidad</td>
+                <td>$ @item.Monto_Total_Deuda</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -21,12 +21,11 @@
         <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
                 <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("CRUD Estudiantes", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("CRUD Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("CRUD Pagos", "Index", "Pagos", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("CRUD Morosidades", "Index", "Morosidades", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Estudiantes", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Pagos", "Index", "Pagos", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Morosidades", "Index", "Morosidades", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Resultados", "Resultados", "Home", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
         </div>
     </div>
@@ -42,9 +41,35 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+<footer class="text-white pt-4 pb-2" style="background-color:#151111">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Columna de Logo -->
+            <div class="col-lg-4 col-md-4 col-12 mb-3">
+                <img src="https://andrestayupanta.neocities.org/imagesMvc/images.jpg" alt="Bullworth College Logo" class="img-fluid mb-2">
+                <p>Comprometidos con la formación de líderes y profesionales que marcarán la diferencia en el mundo.</p>
+            </div>
 
-<footer class="bg-dark text-white">
-    <h4>Sticky footer con Bootstrap</h4>
+            <!-- Columna de Contacto -->
+            <div class="col-lg-4 col-md-4 col-12 mb-3">
+                <h5 class="fw-bold">Contáctanos</h5>
+                <p>Av. 12 de Octubre y Roca,<br> Quito, Ecuador</p>
+                <p>+593 2 123 4567</p>
+                <p>secretaria@bullworth.edu.ec</p>
+            </div>
+
+            <!-- Columna de Enlaces -->
+            <div class="col-lg-4 col-md-12 col-12">
+                <h5 class="fw-bold">Facultades</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white">Facultad de Ciencias</a></li>
+                    <li><a href="#" class="text-white">Facultad de Derecho</a></li>
+                    <li><a href="#" class="text-white">Facultad de Ingeniería</a></li>
+                    <li><a href="#" class="text-white">Facultad de Artes</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </footer>
 
 

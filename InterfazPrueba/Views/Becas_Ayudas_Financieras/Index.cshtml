@@ -6,6 +6,7 @@
     ViewBag.Title = "Index";
 }
 
+<h2>Index</h2>
 
 @using (Html.BeginForm("Index", "Becas_Ayudas_Financieras", FormMethod.Get, new { @class = "form-inline" }))
 {
@@ -27,12 +28,40 @@
 }
 
 
-
-<h2>Index</h2>
 <link href="~/Sources/paginacion.css" rel="stylesheet" />
+
+<!-- Añadir controles de paginación aquí -->
+@Html.PagedListPager(Model.Becas, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+{
+    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+    DisplayLinkToIndividualPages = true,
+    DisplayPageCountAndCurrentLocation = false,
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+    EllipsesFormat = "&#8230;",
+    LinkToFirstPageFormat = "Primera",
+    LinkToPreviousPageFormat = "Anterior",
+    LinkToNextPageFormat = "Siguiente",
+    LinkToLastPageFormat = "Última",
+    PageCountAndCurrentLocationFormat = "Página {0} de {1}.",
+    ItemSliceAndTotalFormat = "Mostrando {0} a {1} de {2} entradas.",
+    FunctionToDisplayEachPageNumber = null,
+    ClassToApplyToFirstListItemInPager = null,
+    ClassToApplyToLastListItemInPager = null,
+    ContainerDivClasses = new[] { "pagination-container" },
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" },
+})
+
+
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -80,31 +109,7 @@
     }
 </table>
 
-<!-- Añadir controles de paginación aquí -->
-@Html.PagedListPager(Model.Becas, page => Url.Action("Index", new { page }), new PagedListRenderOptions
-{
-    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-    DisplayLinkToLastPage = PagedListDisplayMode.Always,
-    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-    DisplayLinkToNextPage = PagedListDisplayMode.Always,
-    DisplayLinkToIndividualPages = true,
-    DisplayPageCountAndCurrentLocation = false,
-    MaximumPageNumbersToDisplay = 5,
-    DisplayEllipsesWhenNotShowingAllPageNumbers = true,
-    EllipsesFormat = "&#8230;",
-    LinkToFirstPageFormat = "Primera",
-    LinkToPreviousPageFormat = "Anterior",
-    LinkToNextPageFormat = "Siguiente",
-    LinkToLastPageFormat = "Última",
-    PageCountAndCurrentLocationFormat = "Página {0} de {1}.",
-    ItemSliceAndTotalFormat = "Mostrando {0} a {1} de {2} entradas.",
-    FunctionToDisplayEachPageNumber = null,
-    ClassToApplyToFirstListItemInPager = null,
-    ClassToApplyToLastListItemInPager = null,
-    ContainerDivClasses = new[] { "pagination-container" },
-    UlElementClasses = new[] { "pagination" },
-    LiElementClasses = new[] { "page-item" },
-})
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
