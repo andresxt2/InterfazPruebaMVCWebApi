@@ -279,32 +279,29 @@
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\ApiBecasWS\Reference.map">
+    <None Include="Web References\ApiBecasWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\ApiEstudiantesWS\Estudiantes.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\ApiEstudiantesWS\PaginacionResultadoOfEstudiantes.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\ApiMorosidadWS\API_GestionMorosidad.wsdl" />
     <Content Include="Web References\ApiMorosidadWS\Morosidad.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\ApiMorosidadWS\Reference.map">
+    <None Include="Web References\ApiMorosidadWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="Web References\ApiPagosWS\API_GestionPagos.wsdl" />
     <Content Include="Web References\ApiPagosWS\Pagos.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Web References\ApiPagosWS\Reference.map">
+    <None Include="Web References\ApiPagosWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="Web References\APIResultadosWS\API_GestionResultados.wsdl" />
     <None Include="Web References\APIResultadosWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -320,10 +317,10 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\ApiEstudiantesWS\API_GestionEstudiantes.wsdl" />
-    <Content Include="Web References\ApiEstudiantesWS\Reference.map">
+    <None Include="Web References\ApiEstudiantesWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

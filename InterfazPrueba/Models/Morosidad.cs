@@ -12,7 +12,7 @@ namespace InterfazPrueba.Models
         [Required]
         [Key]
         public int id_morosidad { get; set; }
-        public int id_estudiante { get; set; }
+        public string id_estudiante { get; set; }
         public string semestre { get; set; }
         public int dias_retraso { get; set; }
         public decimal monto_debido { get; set; }

@@ -11,12 +11,11 @@ namespace InterfazPrueba.Models
     {
         [Required]
         [Key]
-        public int id_estudiante { get; set; }
-
-
         public string ci_estudiante { get; set; }
+
         public string nombre { get; set; }
 
+        public string apellido { get; set; }
 
         [Required(ErrorMessage = "El campo Email es obligatorio.")]
         [EmailAddress(ErrorMessage = "Ingresa un formato de correo electrónico válido.")]

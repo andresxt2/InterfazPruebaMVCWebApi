@@ -20,7 +20,7 @@
       <s:complexType name="Morosidad">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="id_morosidad" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_estudiante" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="dias_retraso" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="monto_debido" type="s:decimal" />
@@ -31,9 +31,9 @@
       </s:complexType>
       <s:complexType name="Estudiantes">
         <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="ci_estudiante" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_estudiante" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombres" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellidos" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="correo_electronico" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="programa_academico" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="estado_matricula" type="s:string" />
@@ -52,7 +52,7 @@
       <s:complexType name="Becas_Ayudas_Financieras">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="id_beca" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_estudiante" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="tipo_beca" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="monto" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
@@ -69,9 +69,10 @@
       <s:complexType name="Pagos">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="id_pago" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="id_estudiante" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_pago" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_estudiante" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="fecha_pago" type="s:dateTime" />
-          <s:element minOccurs="1" maxOccurs="1" name="monto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="saldo" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="semestre" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="borrado_logico" nillable="true" type="s:boolean" />
@@ -82,7 +83,7 @@
       <s:element name="ListarPorEstudiante">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>

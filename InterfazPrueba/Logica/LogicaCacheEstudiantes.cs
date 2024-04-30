@@ -21,24 +21,24 @@ namespace InterfazPrueba.Logica
             {
                 estudiantesCache = estudiante.Listar().Select(apiEstudiante => new Models.Estudiante
                 {
-                    id_estudiante = apiEstudiante.id_estudiante,
-                    ci_estudiante = apiEstudiante.ci_estudiante,
-                    nombre = apiEstudiante.nombre,
+                    ci_estudiante = apiEstudiante.id_estudiante,
+                    nombre = apiEstudiante.nombres,
+                    apellido = apiEstudiante.apellidos,
                     correo_electronico = apiEstudiante.correo_electronico,
                     programa_academico = apiEstudiante.programa_academico,
                     estado_matricula = apiEstudiante.estado_matricula
-                }).OrderByDescending(e => e.id_estudiante).ToList();
+                }).ToList();
                 //cache
                 cache.Set(cacheKey, estudiantesCache, DateTimeOffset.UtcNow.AddMinutes(40)); // Asumiendo cacheDuration de 30 minutos
 
             }
 
-            return estudiantesCache.OrderByDescending(x => x.id_estudiante).ToList();
+            return estudiantesCache.ToList();
         }
 
-        public Models.Estudiante ListarCacheEstudiantePorId(int id)
+        public Models.Estudiante ListarCacheEstudiantePorId(string id)
         {
-            return ListarEstudiantesCache().FirstOrDefault(e => e.id_estudiante == id);
+            return ListarEstudiantesCache().FirstOrDefault(e => e.ci_estudiante == id);
         }
 
         public Models.Estudiante ListarCacheEstudiantePorNombre (string nombre)
@@ -57,18 +57,18 @@ namespace InterfazPrueba.Logica
         {
             ActualizarCache("estudiantesCacheKey", () => estudiante.Listar().Select(apiEstudiante => new Models.Estudiante
             {
-                id_estudiante = apiEstudiante.id_estudiante,
-                ci_estudiante = apiEstudiante.ci_estudiante,
-                nombre = apiEstudiante.nombre,
+                ci_estudiante = apiEstudiante.id_estudiante,
+                nombre = apiEstudiante.nombres,
+                apellido = apiEstudiante.apellidos,
                 correo_electronico = apiEstudiante.correo_electronico,
                 programa_academico = apiEstudiante.programa_academico,
                 estado_matricula = apiEstudiante.estado_matricula
             }).ToList());
         }
 
-        public List<Models.Estudiante> ListarCacheEstudiantePorIds(List<int> id)
+        public List<Models.Estudiante> ListarCacheEstudiantePorIds(List<string> id)
         {
-            return ListarEstudiantesCache().Where(e => id.Contains(e.id_estudiante)).ToList();
+            return ListarEstudiantesCache().Where(e => id.Contains(e.ci_estudiante)).ToList();
         }
 
 

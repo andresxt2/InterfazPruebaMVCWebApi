@@ -45,7 +45,7 @@ namespace InterfazPrueba.Views.UIPagos
 
             // Obtener todos los estudiantes asociados a estos IDs
             var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
-                .ToDictionary(est => est.id_estudiante);
+                .ToDictionary(est => est.ci_estudiante);
 
             // Asignar estudiantes a cada pago
             foreach (var pago in pagosList)
@@ -100,9 +100,9 @@ namespace InterfazPrueba.Views.UIPagos
         // GET: Pagos/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDPagos"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDPagos"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
             // Preparando el ViewBag para tipo_beca
-            ViewBag.EstadoPagos = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo" });
+            ViewBag.EstadoPagos = new SelectList(new List<string> { "pendiente", "pagado" });
 
             // Preparando el ViewBag para semestre
             ViewBag.SemestrePagos = new SelectList(new List<string> { "2023A", "2023B" });
@@ -147,7 +147,7 @@ namespace InterfazPrueba.Views.UIPagos
             }
             ViewData["EstudianteIDPagosMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", pagos.id_estudiante);
 
-            ViewBag.EstadoPagosMod = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo" }, pagos.estado);
+            ViewBag.EstadoPagosMod = new SelectList(new List<string> { "pendiente", "pagado" }, pagos.estado);
 
             // Preparando el ViewBag para semestre
             ViewBag.SemestrePagosMod = new SelectList(new List<string> { "2023A", "2023B" }, pagos.semestre);

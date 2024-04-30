@@ -23,9 +23,10 @@ namespace InterfazPrueba.Logica
                 pagosCache = pago.Listar().Select(apiPago => new Models.Pagos
                 {
                     id_pago = apiPago.id_pago,
+                    cod_pago = apiPago.cod_pago,
                     id_estudiante = apiPago.id_estudiante,
                     fecha_pago = apiPago.fecha_pago,
-                    monto = apiPago.monto,
+                    monto = apiPago.saldo,
                     semestre = apiPago.semestre,
                     estado = apiPago.estado
                 }).OrderByDescending(e => e.id_pago).ToList();
@@ -57,8 +58,9 @@ namespace InterfazPrueba.Logica
             {
                 id_pago = apiPago.id_pago,
                 id_estudiante = apiPago.id_estudiante,
+                cod_pago = apiPago.cod_pago,
                 fecha_pago = apiPago.fecha_pago,
-                monto = apiPago.monto,
+                monto = apiPago.saldo,
                 semestre = apiPago.semestre,
                 estado = apiPago.estado
             }).OrderByDescending(e => e.id_pago).ToList());

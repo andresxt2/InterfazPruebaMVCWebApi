@@ -74,6 +74,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Pagos.FirstOrDefault().cod_pago)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Pagos.FirstOrDefault().Estudiantes.nombre)
         </th>
         <th>
@@ -94,6 +97,9 @@
     @foreach (var item in Model.Pagos)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_pago)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
             </td>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -14,8 +15,10 @@ namespace InterfazPrueba.Models
         [Key]
         public int id_pago { get; set; }
 
+        public string cod_pago { get; set; }
+
         [Required(ErrorMessage = "Se requiere el ID del estudiante.")]
-        public int id_estudiante { get; set; }
+        public string id_estudiante { get; set; }
 
         [DataType(DataType.Date)]
         public System.DateTime fecha_pago { get; set; }

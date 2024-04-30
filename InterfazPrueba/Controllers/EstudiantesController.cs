@@ -45,13 +45,13 @@ namespace InterfazPrueba.Views.UIEstudiantes
 
 
         // GET: Estudiantes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id.Value);
+            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id);
             if (estudiante == null)
             {
                 return HttpNotFound();
@@ -72,7 +72,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_estudiante,ci_estudiante,nombre,correo_electronico,programa_academico,estado_matricula")] Estudiante estudiante)
+        public ActionResult Create([Bind(Include = "ci_estudiante,nombre,apellido,correo_electronico,programa_academico,estado_matricula")] Estudiante estudiante)
         {
             if (ModelState.IsValid)
             {
@@ -85,13 +85,13 @@ namespace InterfazPrueba.Views.UIEstudiantes
         }
 
         // GET: Estudiantes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id.Value);
+            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id);
             if (estudiante == null)
             {
                 return HttpNotFound();
@@ -107,7 +107,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_estudiante,ci_estudiante,nombre,correo_electronico,programa_academico,estado_matricula")] Estudiante estudiante)
+        public ActionResult Edit([Bind(Include = "ci_estudiante,nombre,apellido,correo_electronico,programa_academico,estado_matricula")] Estudiante estudiante)
         {
             if (ModelState.IsValid)
             {
@@ -122,13 +122,13 @@ namespace InterfazPrueba.Views.UIEstudiantes
         }
 
         // GET: Estudiantes/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id.Value);
+            Estudiante estudiante = logicaEstudiantes.BuscarEstudiante(id);
             if (estudiante == null)
             {
                 return HttpNotFound();
@@ -139,7 +139,7 @@ namespace InterfazPrueba.Views.UIEstudiantes
         // POST: Estudiantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             logicaEstudiantes.EliminarEstudiante(id);
             logicaCacheEstudiantes.ActualizarEstudiantesCache();

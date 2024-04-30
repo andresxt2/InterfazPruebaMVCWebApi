@@ -39,7 +39,7 @@ namespace InterfazPrueba.Views.UIBecas
 
             // Obtener todos los estudiantes asociados a las becas en una sola consulta
             var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
-                .ToDictionary(estudiante => estudiante.id_estudiante);
+                .ToDictionary(estudiante => estudiante.ci_estudiante);
 
             // Asignar los estudiantes correspondientes a las becas
             foreach (var beca in becasList)
@@ -94,7 +94,7 @@ namespace InterfazPrueba.Views.UIBecas
         // GET: Becas_Ayudas_Financieras/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDBecas"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDBecas"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
             // Preparando el ViewBag para tipo_beca
             ViewBag.TipoBecaEnBecas = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" });
 

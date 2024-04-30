@@ -20,9 +20,8 @@ namespace InterfazPrueba.Logica
                 if (contador < 1000)
                 {
                     Models.Estudiante estudiante = new Models.Estudiante();
-                    estudiante.id_estudiante = estudianteWS.id_estudiante;
-                    estudiante.ci_estudiante = estudianteWS.ci_estudiante;
-                    estudiante.nombre = estudianteWS.nombre;
+                    estudiante.ci_estudiante = estudianteWS.id_estudiante;
+                    estudiante.nombre = estudianteWS.nombres;
                     estudiante.correo_electronico = estudianteWS.correo_electronico;
                     estudiante.programa_academico = estudianteWS.programa_academico;
                     estudiante.estado_matricula = estudianteWS.estado_matricula;
@@ -37,20 +36,20 @@ namespace InterfazPrueba.Logica
             return listaEstudiantes;
         }
 
-        public Models.Estudiante BuscarEstudiante(int id)
+        public Models.Estudiante BuscarEstudiante(string id)
         {
             var estudianteWS = estudiantes.leerPorId(id);
             Models.Estudiante estudiante = new Models.Estudiante();
-            estudiante.id_estudiante = estudianteWS.id_estudiante;
-            estudiante.ci_estudiante = estudianteWS.ci_estudiante;
-            estudiante.nombre = estudianteWS.nombre;
+            estudiante.ci_estudiante = estudianteWS.id_estudiante;
+            estudiante.nombre = estudianteWS.nombres;
             estudiante.correo_electronico = estudianteWS.correo_electronico;
             estudiante.programa_academico = estudianteWS.programa_academico;
             estudiante.estado_matricula = estudianteWS.estado_matricula;
             return estudiante;
         }
-
-        /*  public List <Models.Estudiante> Paginacion(int pagina = 1, int tamanoPagina = 100)
+        
+        /*
+          public List <Models.Estudiante> Paginacion(int pagina = 1, int tamanoPagina = 100)
             {
                 var estudiantesWs = estudiantes.ListarPaginado(pagina, tamanoPagina, null);
                 List<Models.Estudiante> listaEstudiantes = new List<Models.Estudiante>();
@@ -73,8 +72,9 @@ namespace InterfazPrueba.Logica
         public void crearEstudiante(Models.Estudiante estudiante)
         {
             ApiEstudiantesWS.Estudiantes estudianteWS = new ApiEstudiantesWS.Estudiantes();
-            estudianteWS.ci_estudiante = estudiante.ci_estudiante;
-            estudianteWS.nombre = estudiante.nombre;
+            estudianteWS.id_estudiante = estudiante.ci_estudiante;
+            estudianteWS.nombres = estudiante.nombre;
+            estudianteWS.apellidos = estudiante.apellido;
             estudianteWS.correo_electronico = estudiante.correo_electronico;
             estudianteWS.programa_academico = estudiante.programa_academico;
             estudianteWS.estado_matricula = estudiante.estado_matricula;
@@ -85,9 +85,9 @@ namespace InterfazPrueba.Logica
         public bool actualizarEstudiante(Models.Estudiante estudiante)
         {
             ApiEstudiantesWS.Estudiantes estudianteWS = new ApiEstudiantesWS.Estudiantes();
-            estudianteWS.id_estudiante = estudiante.id_estudiante;
-            estudianteWS.ci_estudiante = estudiante.ci_estudiante;
-            estudianteWS.nombre = estudiante.nombre;
+            estudianteWS.id_estudiante = estudiante.ci_estudiante;
+            estudianteWS.nombres = estudiante.nombre;
+            estudianteWS.apellidos = estudiante.apellido;
             estudianteWS.correo_electronico = estudiante.correo_electronico;
             estudianteWS.programa_academico = estudiante.programa_academico;
             estudianteWS.estado_matricula = estudiante.estado_matricula;
@@ -95,9 +95,10 @@ namespace InterfazPrueba.Logica
             return estudiantes.Actualizar(estudianteWS);
         }
 
-        public bool EliminarEstudiante(int id)
+        public bool EliminarEstudiante(string id)
         {
             return estudiantes.Eliminar(id);
         }
+
     }
 }

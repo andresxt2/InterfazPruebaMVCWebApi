@@ -8,7 +8,7 @@ namespace InterfazPrueba.Logica
     public class LogicaCRUDPagos
     {
         ApiPagosWS.API_GestionPagos pagos = new ApiPagosWS.API_GestionPagos();
-
+        
         public List<Models.Pagos> ListarPagos ()
         {
             List<Models.Pagos> listaPagos = new List<Models.Pagos>();
@@ -20,9 +20,10 @@ namespace InterfazPrueba.Logica
                 {
                     Models.Pagos pago = new Models.Pagos();
                     pago.id_pago = pagoWS.id_pago;
+                    pago.cod_pago = pagoWS.cod_pago;
                     pago.id_estudiante = pagoWS.id_estudiante;
                     pago.fecha_pago = pagoWS.fecha_pago;
-                    pago.monto = pagoWS.monto;
+                    pago.monto = pagoWS.saldo;
                     pago.semestre = pagoWS.semestre;
                     pago.estado = pagoWS.estado;
                     listaPagos.Add(pago);
@@ -43,7 +44,7 @@ namespace InterfazPrueba.Logica
             pago.id_pago = pagoWS.id_pago;
             pago.id_estudiante = pagoWS.id_estudiante;
             pago.fecha_pago = pagoWS.fecha_pago;
-            pago.monto = pagoWS.monto;
+            pago.monto = pagoWS.saldo;
             pago.semestre = pagoWS.semestre;
             pago.estado = pagoWS.estado;
             return pago;
@@ -54,7 +55,7 @@ namespace InterfazPrueba.Logica
             ApiPagosWS.Pagos pagoWS = new ApiPagosWS.Pagos();
             pagoWS.id_estudiante = pago.id_estudiante;
             pagoWS.fecha_pago = pago.fecha_pago;
-            pagoWS.monto = pago.monto;
+            pagoWS.saldo = pago.monto;
             pagoWS.semestre = pago.semestre;
             pagoWS.estado = pago.estado;
             pagos.Insertar(pagoWS);
@@ -66,7 +67,7 @@ namespace InterfazPrueba.Logica
             pagoWS.id_pago = pago.id_pago;
             pagoWS.id_estudiante = pago.id_estudiante;
             pagoWS.fecha_pago = pago.fecha_pago;
-            pagoWS.monto = pago.monto;
+            pagoWS.saldo = pago.monto;
             pagoWS.semestre = pago.semestre;
             pagoWS.estado = pago.estado;
             return pagos.Actualizar(pagoWS);

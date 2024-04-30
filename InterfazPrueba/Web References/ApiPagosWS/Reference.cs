@@ -131,19 +131,19 @@ namespace InterfazPrueba.ApiPagosWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ListarPorEstudiante", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Pagos[] ListarPorEstudiante(int id) {
+        public Pagos[] ListarPorEstudiante(string id) {
             object[] results = this.Invoke("ListarPorEstudiante", new object[] {
                         id});
             return ((Pagos[])(results[0]));
         }
         
         /// <remarks/>
-        public void ListarPorEstudianteAsync(int id) {
+        public void ListarPorEstudianteAsync(string id) {
             this.ListarPorEstudianteAsync(id, null);
         }
         
         /// <remarks/>
-        public void ListarPorEstudianteAsync(int id, object userState) {
+        public void ListarPorEstudianteAsync(string id, object userState) {
             if ((this.ListarPorEstudianteOperationCompleted == null)) {
                 this.ListarPorEstudianteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListarPorEstudianteOperationCompleted);
             }
@@ -331,11 +331,13 @@ namespace InterfazPrueba.ApiPagosWS {
         
         private int id_pagoField;
         
-        private int id_estudianteField;
+        private string cod_pagoField;
+        
+        private string id_estudianteField;
         
         private System.DateTime fecha_pagoField;
         
-        private decimal montoField;
+        private decimal saldoField;
         
         private string semestreField;
         
@@ -358,7 +360,17 @@ namespace InterfazPrueba.ApiPagosWS {
         }
         
         /// <remarks/>
-        public int id_estudiante {
+        public string cod_pago {
+            get {
+                return this.cod_pagoField;
+            }
+            set {
+                this.cod_pagoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string id_estudiante {
             get {
                 return this.id_estudianteField;
             }
@@ -378,12 +390,12 @@ namespace InterfazPrueba.ApiPagosWS {
         }
         
         /// <remarks/>
-        public decimal monto {
+        public decimal saldo {
             get {
-                return this.montoField;
+                return this.saldoField;
             }
             set {
-                this.montoField = value;
+                this.saldoField = value;
             }
         }
         
@@ -448,11 +460,11 @@ namespace InterfazPrueba.ApiPagosWS {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class Estudiantes {
         
-        private int id_estudianteField;
+        private string id_estudianteField;
         
-        private string ci_estudianteField;
+        private string nombresField;
         
-        private string nombreField;
+        private string apellidosField;
         
         private string correo_electronicoField;
         
@@ -471,7 +483,7 @@ namespace InterfazPrueba.ApiPagosWS {
         private Pagos[] pagosField;
         
         /// <remarks/>
-        public int id_estudiante {
+        public string id_estudiante {
             get {
                 return this.id_estudianteField;
             }
@@ -481,22 +493,22 @@ namespace InterfazPrueba.ApiPagosWS {
         }
         
         /// <remarks/>
-        public string ci_estudiante {
+        public string nombres {
             get {
-                return this.ci_estudianteField;
+                return this.nombresField;
             }
             set {
-                this.ci_estudianteField = value;
+                this.nombresField = value;
             }
         }
         
         /// <remarks/>
-        public string nombre {
+        public string apellidos {
             get {
-                return this.nombreField;
+                return this.apellidosField;
             }
             set {
-                this.nombreField = value;
+                this.apellidosField = value;
             }
         }
         
@@ -593,7 +605,7 @@ namespace InterfazPrueba.ApiPagosWS {
         
         private int id_becaField;
         
-        private int id_estudianteField;
+        private string id_estudianteField;
         
         private string tipo_becaField;
         
@@ -618,7 +630,7 @@ namespace InterfazPrueba.ApiPagosWS {
         }
         
         /// <remarks/>
-        public int id_estudiante {
+        public string id_estudiante {
             get {
                 return this.id_estudianteField;
             }
@@ -700,7 +712,7 @@ namespace InterfazPrueba.ApiPagosWS {
         
         private int id_morosidadField;
         
-        private int id_estudianteField;
+        private string id_estudianteField;
         
         private string semestreField;
         
@@ -725,7 +737,7 @@ namespace InterfazPrueba.ApiPagosWS {
         }
         
         /// <remarks/>
-        public int id_estudiante {
+        public string id_estudiante {
             get {
                 return this.id_estudianteField;
             }

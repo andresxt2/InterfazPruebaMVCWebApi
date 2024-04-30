@@ -33,7 +33,7 @@ namespace InterfazPrueba.Views.UIMorosidad
 
             // Obtener todos los estudiantes asociados a estos IDs
             var estudiantesDict = logicaCacheEstudiantes.ListarCacheEstudiantePorIds(idsEstudiantes)
-                .ToDictionary(est => est.id_estudiante);
+                .ToDictionary(est => est.ci_estudiante);
 
             // Asignar estudiantes a cada morosidad
             foreach (var morosidad in morosidadesList)
@@ -87,7 +87,7 @@ namespace InterfazPrueba.Views.UIMorosidad
         // GET: Morosidads/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDMorosidad"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
+            ViewData["EstudianteIDMorosidad"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
             ViewBag.SemestreMorosidad = new SelectList(new List<string> { "2023A", "2023B" });
             return View();
         }

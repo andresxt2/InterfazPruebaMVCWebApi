@@ -13,7 +13,7 @@ namespace InterfazPrueba.Models
         [Required]
         [Key]
         public int id_beca { get; set; }
-        public int id_estudiante { get; set; }
+        public string id_estudiante { get; set; }
         public string tipo_beca { get; set; }
         public decimal monto { get; set; }
         public string semestre { get; set; }
