@@ -46,6 +46,12 @@ namespace InterfazPrueba.Logica
             return ListarPagosCache().FirstOrDefault(e => e.estado == estado);
         }
 
+        public List <Models.Pagos> ListarCachePendientes(string cedula)
+        {
+            return ListarPagosCache().Where(e => e.estado == "pendiente" && e.id_estudiante == cedula).ToList();
+        }
+
+
         private void ActualizarCache<T>(string cacheKey, Func<List<T>> obtenerDatosDesdeApi)
         {
             var datosActualizados = obtenerDatosDesdeApi();

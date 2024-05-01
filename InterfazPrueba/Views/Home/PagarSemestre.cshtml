@@ -1,0 +1,75 @@
+﻿@model InterfazPrueba.Models.Pagos
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Pagar Semestre";
+}
+
+<h2>Pagar Semestre</h2>
+
+@using (Html.BeginForm("PagarSemestre", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.id_estudiante, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.id_estudiante, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.id_estudiante, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Buscar Pagos Pendientes" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+@if (ViewBag.PagosPendientes != null && ViewBag.InfoEstudiante != null)
+{
+    <h3>Pagos Pendientes</h3>
+    <table class="table table-striped">
+        <div>
+            <div>
+                <h3>Información del Estudiante</h3>
+                <p>Nombre: @ViewBag.InfoEstudiante.nombre</p>
+                <p>Apellido: @ViewBag.InfoEstudiante.apellido</p>
+                <p>Cédula: @ViewBag.InfoEstudiante.ci_estudiante</p>
+                <!-- Agrega más campos según sea necesario -->
+            </div>
+        </div>
+        <thead>
+            <tr>
+                <th>Cod Pago</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pago in ViewBag.PagosPendientes as List<InterfazPrueba.Models.Pagos>)
+            {
+                <tr>
+                    <td>@pago.cod_pago</td>
+                    <td>@pago.monto.ToString("C")</td>
+                    <td>@pago.estado</td>
+                    <td>
+                        <!-- Aquí podrías añadir botones para acciones específicas como pagar o editar -->
+                        <button class="btn btn-success">Cargar Pagos</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    if (TempData["SearchPerformed"] != null)
+    {
+        <p>No se encontraron pagos pendientes para la cédula ingresada.</p>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

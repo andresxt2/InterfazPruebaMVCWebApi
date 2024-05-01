@@ -94,7 +94,14 @@ namespace InterfazPrueba.Views.UIBecas
         // GET: Becas_Ayudas_Financieras/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDBecas"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+            .Select(e => new
+            {
+            ci_estudiante = e.ci_estudiante,
+            nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+            }).ToList();
+
+            ViewData["EstudianteIDBecas"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto");
             // Preparando el ViewBag para tipo_beca
             ViewBag.TipoBecaEnBecas = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" });
 
@@ -138,7 +145,15 @@ namespace InterfazPrueba.Views.UIBecas
 
             ViewBag.SemestreBecasMod = new SelectList(new List<string> { "2023A", "2023B" }, becas_Ayudas_Financieras.semestre);
             ViewBag.TipoBecaEnBecasMod = new SelectList(new List<string> { "Necesidad", "Merito", "Investigacion" }, becas_Ayudas_Financieras.tipo_beca);
-            ViewData["EstudianteIDBecasMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre");
+
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+          .Select(e => new
+          {
+              ci_estudiante = e.ci_estudiante,
+              nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+          }).ToList();
+
+            ViewData["EstudianteIDBecasMod"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto", becas_Ayudas_Financieras.id_estudiante);
             return View(becas_Ayudas_Financieras);
         }
 

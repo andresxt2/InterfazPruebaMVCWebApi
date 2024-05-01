@@ -100,7 +100,15 @@ namespace InterfazPrueba.Views.UIPagos
         // GET: Pagos/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDPagos"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
+
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+          .Select(e => new
+          {
+              ci_estudiante = e.ci_estudiante,
+              nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+          }).ToList();
+
+            ViewData["EstudianteIDPagos"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto");
             // Preparando el ViewBag para tipo_beca
             ViewBag.EstadoPagos = new SelectList(new List<string> { "pendiente", "pagado" });
 
@@ -123,13 +131,6 @@ namespace InterfazPrueba.Views.UIPagos
                 LogicaCachePagos.ActualizarPagosCache();
                 return RedirectToAction("Index");
             }
-
-         //   ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", pagos.id_estudiante);
-            // Preparando el ViewBag para tipo_beca
-           // ViewBag.Estado = new SelectList(new List<string> { "Pendiente", "Parcial", "Completo"}, pagos.estado);
-
-            // Preparando el ViewBag para semestre
-        //    ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, pagos.semestre);
             return View(pagos);
         }
 
@@ -145,7 +146,15 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return HttpNotFound();
             }
-            ViewData["EstudianteIDPagosMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", pagos.id_estudiante);
+
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+       .Select(e => new
+       {
+           ci_estudiante = e.ci_estudiante,
+           nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+       }).ToList();
+
+            ViewData["EstudianteIDPagosMod"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto", pagos.id_estudiante);
 
             ViewBag.EstadoPagosMod = new SelectList(new List<string> { "pendiente", "pagado" }, pagos.estado);
 

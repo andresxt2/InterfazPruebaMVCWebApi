@@ -87,7 +87,14 @@ namespace InterfazPrueba.Views.UIMorosidad
         // GET: Morosidads/Create
         public ActionResult Create()
         {
-            ViewData["EstudianteIDMorosidad"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "ci_estudiante", "nombre");
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+                .Select(e => new
+                {
+                    ci_estudiante = e.ci_estudiante,
+                    nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+                }).ToList();
+
+            ViewData["EstudianteIDMorosidad"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto");
             ViewBag.SemestreMorosidad = new SelectList(new List<string> { "2023A", "2023B" });
             return View();
         }
@@ -121,7 +128,15 @@ namespace InterfazPrueba.Views.UIMorosidad
             {
                 return HttpNotFound();
             }
-            ViewData["EstudianteIDMorosidadMod"] = new SelectList(logicaCacheEstudiantes.ListarEstudiantesCache(), "id_estudiante", "nombre", morosidad.id_estudiante);
+
+            var estudiantes = logicaCacheEstudiantes.ListarEstudiantesCache()
+            .Select(e => new
+            {
+            ci_estudiante = e.ci_estudiante,
+            nombreCompleto = e.nombre + " " + e.apellido // Concatenación de nombre y apellido
+            }).ToList();
+
+            ViewData["EstudianteIDMorosidadMod"] = new SelectList(estudiantes, "ci_estudiante", "nombreCompleto",morosidad.id_estudiante);
             ViewBag.SemestreMorosidadMod = new SelectList(new List<string> { "2023A", "2023B" }, morosidad.semestre);
            // ViewData["Semestre"] = new SelectList(new List<string> { "2023A", "2023B" } , morosidad.semestre);
 
@@ -141,8 +156,6 @@ namespace InterfazPrueba.Views.UIMorosidad
                 logicaCacheMorosidades.ActualizarMorosidadesCache();
                 return RedirectToAction("Index");
             }
-           /* ViewBag.Semestre = new SelectList(new List<string> { "2023A", "2023B" }, morosidad.semestre);
-            ViewData["EstudianteID"] = new SelectList(logicaEstudiantes.ListarEstudiantes(), "id_estudiante", "nombre", morosidad.id_estudiante);*/
 
             return View(morosidad);
         }

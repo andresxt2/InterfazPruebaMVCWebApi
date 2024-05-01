@@ -275,6 +275,9 @@
     <Content Include="Views\Pagos\Edit.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
     <Content Include="Views\Home\Resultados.cshtml" />
+    <Content Include="Views\Home\HallPagos.cshtml" />
+    <Content Include="Views\Home\Hall.cshtml" />
+    <Content Include="Views\Home\PagarSemestre.cshtml" />
     <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
       <DependentUpon>Reference.map</DependentUpon>

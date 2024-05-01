@@ -79,6 +79,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Pagos.FirstOrDefault().Estudiantes.nombre)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Pagos.FirstOrDefault().Estudiantes.apellido)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Pagos.FirstOrDefault().fecha_pago)
         </th>
@@ -102,6 +106,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estudiantes.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiantes.apellido)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fecha_pago)

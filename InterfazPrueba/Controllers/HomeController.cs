@@ -1,9 +1,6 @@
 ﻿using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Newtonsoft.Json;
 using System.Web.Mvc;
 
 namespace InterfazPrueba.Controllers
@@ -11,6 +8,8 @@ namespace InterfazPrueba.Controllers
     public class HomeController : Controller
     {
         private LogicaResultados logicaResultados = new LogicaResultados();
+        LogicaCachePagos logicaCachePagos = new LogicaCachePagos();
+        LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
         public ActionResult Index()
         {
             return View();
@@ -30,6 +29,44 @@ namespace InterfazPrueba.Controllers
 
             return View(model);
         }
+
+        public ActionResult PagarSemestre()
+        {
+            // Verificar si TempData contiene los pagos pendientes y pasar a ViewBag
+            if (TempData["PagosPendientes"] != null && TempData["InfoEstudiante"] != null)
+            {
+                ViewBag.PagosPendientes = TempData["PagosPendientes"];
+                ViewBag.InfoEstudiante = JsonConvert.DeserializeObject<Estudiante>(TempData["InfoEstudiante"].ToString());
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PagarSemestre(Pagos pago)
+        {
+            if (ModelState.IsValid)
+            {
+                var pagosPendientes = logicaCachePagos.ListarCachePendientes(pago.id_estudiante);
+                var estudiantePagoPendiente = logicaCacheEstudiantes.ListarCacheEstudiantePorId(pago.id_estudiante);
+                // Guardar los pagos pendientes en TempData para pasarlos a otra acción
+                TempData["PagosPendientes"] = pagosPendientes;
+                TempData["InfoEstudiante"] = JsonConvert.SerializeObject(estudiantePagoPendiente);
+
+
+                // Redirigir a PagarSemestre
+                return RedirectToAction("PagarSemestre");
+            }
+
+            // Si hay un problema, retorna la misma vista con los datos ingresados
+            return View(pago);
+        }
+
+
+
+
 
         public ActionResult About()
         {
