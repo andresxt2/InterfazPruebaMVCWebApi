@@ -2,6 +2,19 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Pagar Semestre";
+
+    bool todosProcesados = true;
+    if (ViewBag.PagosPendientes != null)
+    {
+        foreach (var pago in ViewBag.PagosPendientes as List<InterfazPrueba.Models.Pagos>)
+        {
+            if (pago.estado != "procesado")
+            {
+                todosProcesados = false;
+                break;
+            }
+        }
+    }
 }
 
 <h2>Pagar Semestre</h2>
@@ -20,17 +33,15 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Buscar Pagos Pendientes" class="btn btn-primary" />
+            <input type="submit" value="Buscar Pagos Pendientes" class="btn btn-primary mt-2" />
         </div>
     </div>
 }
-
 @if (ViewBag.PagosPendientes != null && ViewBag.InfoEstudiante != null)
 {
-    <h3>Pagos Pendientes</h3>
-    <table class="table table-striped">
-        <div>
-            <div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
                 <h3>Información del Estudiante</h3>
                 <p>Nombre: @ViewBag.InfoEstudiante.nombre</p>
                 <p>Apellido: @ViewBag.InfoEstudiante.apellido</p>
@@ -38,29 +49,41 @@
                 <!-- Agrega más campos según sea necesario -->
             </div>
         </div>
-        <thead>
-            <tr>
-                <th>Cod Pago</th>
-                <th>Monto</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pago in ViewBag.PagosPendientes as List<InterfazPrueba.Models.Pagos>)
-            {
-                <tr>
-                    <td>@pago.cod_pago</td>
-                    <td>@pago.monto.ToString("C")</td>
-                    <td>@pago.estado</td>
-                    <td>
-                        <!-- Aquí podrías añadir botones para acciones específicas como pagar o editar -->
-                        <button class="btn btn-success">Cargar Pagos</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Pagos Pendientes</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Cod Pago</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pago in ViewBag.PagosPendientes as List<InterfazPrueba.Models.Pagos>)
+                        {
+                            <tr>
+                                <td>@pago.cod_pago</td>
+                                <td>@pago.monto.ToString("C")</td>
+                                <td>@pago.estado</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 d-flex justify-content-center">
+                <!-- Botón para cargar los pagos -->
+                <a href="@Url.Action("CargarPagos", new { pagosPendientes = ViewBag.PagosPendientes, infoEstudiante = ViewBag.InfoEstudiante })" class="btn btn-success @if (todosProcesados) { <text>disabled</text> }">Cargar Pagos</a>
+            </div>
+        </div>
+
+    </div>
+    TempData["PagosPendientes"] = ViewBag.PagosPendientes;
+    TempData["InfoEstudiante"] = ViewBag.InfoEstudiante;
 }
 else
 {

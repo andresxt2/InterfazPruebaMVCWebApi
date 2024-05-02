@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Productos Disponibles";
+}
+
+<section class="container mt-5 p-3">
+    <div class="row justify-content-center">
+        <!-- Producto 1 -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <img class="card-img-top" src="ruta/a/imagen_zapato1.jpg" alt="Zapato Clásico">
+                <div class="card-body">
+                    <h5 class="card-title">Semestre 2024-A</h5>
+                    <p class="card-text">$3000</p>
+                    <button class="btn btn-primary" onclick="agregarAlCarrito(this.getAttribute('data-producto'))" data-producto='{"productoID":"1", "nombre":"Semestre 2024-A", "precio":3000}'>
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <img class="card-img-top" src="ruta/a/imagen_zapato2.jpg" alt="Zapato Deportivo">
+                <div class="card-body">
+                    <h5 class="card-title">Semestre 2024-B</h5>
+                    <p class="card-text">$3000</p>
+                    <button class="btn btn-primary" onclick="agregarAlCarrito(this.getAttribute('data-producto'))" data-producto='{"productoID":"2", "nombre":"Semestre 2024-B", "precio":3000}'>
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <img class="card-img-top" src="ruta/a/imagen_zapato3.jpg" alt="Zapato Moderno">
+                <div class="card-body">
+                    <h5 class="card-title">Semestre 2024-Verano-Idiomas</h5>
+                    <p class="card-text">$300</p>
+                    <button class="btn btn-primary" onclick="agregarAlCarrito(this.getAttribute('data-producto'))" data-producto='{"productoID":"3", "nombre":"Semestre 2024-Verano-Idiomas", "precio":300}'>
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <img class="card-img-top" src="ruta/a/imagen_zapato3.jpg" alt="Zapato Moderno">
+                <div class="card-body">
+                    <h5 class="card-title">Semestre 2024-Invierno-Idiomas</h5>
+                    <p class="card-text">$300</p>
+                    <button class="btn btn-primary" onclick="agregarAlCarrito(this.getAttribute('data-producto'))" data-producto='{"productoID":"4", "nombre":"Semestre 2024-Invierno-Idiomas", "precio":300}'>
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

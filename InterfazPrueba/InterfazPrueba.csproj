@@ -239,6 +239,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Sources\estilohero.css" />
+    <Content Include="Sources\js\broadcastHandler.js" />
+    <Content Include="Sources\js\cart.js" />
+    <Content Include="Sources\js\cartService.js" />
+    <Content Include="Sources\js\pago.js" />
+    <Content Include="Sources\js\site.js" />
+    <Content Include="Sources\js\video.js" />
     <Content Include="Sources\paginacion.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -275,8 +281,8 @@
     <Content Include="Views\Pagos\Edit.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
     <Content Include="Views\Home\Resultados.cshtml" />
-    <Content Include="Views\Home\HallPagos.cshtml" />
-    <Content Include="Views\Home\Hall.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\Secciones.cshtml" />
     <Content Include="Views\Home\PagarSemestre.cshtml" />
     <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">

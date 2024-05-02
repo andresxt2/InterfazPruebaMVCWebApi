@@ -48,7 +48,8 @@ namespace InterfazPrueba.Logica
 
         public List <Models.Pagos> ListarCachePendientes(string cedula)
         {
-            return ListarPagosCache().Where(e => e.estado == "pendiente" && e.id_estudiante == cedula).ToList();
+            return ListarPagosCache().Where(e => (e.estado == "pendiente" || e.estado == "procesado") && e.id_estudiante == cedula).ToList();
+            //  return ListarPagosCache().Where(e => e.estado == "pendiente" && e.id_estudiante == cedula).ToList();
         }
 
 

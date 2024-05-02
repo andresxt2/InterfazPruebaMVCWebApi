@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@section Scripts {
+    <script src="~/Sources/js/cart.js" defer></script>
+}
+
+<section class="container" id="cart-container">
+    <div class="row p-3 g-4 justify-content-center">
+
+    </div>
+</section>
+
+<p id="carrito-vacio" class="text-center">Ups! Tu carrito está vacío, <a href="@Url.Action("Index", "Home")">elige algunos productos</a></p>
+
+<form action="@Url.Action("Comprar", "Home")" method="post">
+    <div id="hidden-section">
+        <input type="hidden" id="zapatosData" name="ZapatosData" />
+        <input type="hidden" id="subtotalData" name="SubtotalData" />
+        <section id="totales" class="d-flex flex-column align-items-center fw-bold">
+            <p>Total unidades: <span id="cantidad">0</span></p>
+            <p>Total precio: $<span id="precio">0</span></p>
+            <article class="d-flex flex-column g-3 mb-3">
+                <button type="button" class="mb-3 bg-success-subtle custom-btn fw-bold" id="comprar">Comprar</button>
+                <button type="button" id="reiniciar" class="bg-cart custom-btn fw-bold">Reiniciar Carrito</button>
+            </article>
+        </section>
+    </div>
+</form>
+
+@if (TempData["ErrorMensaje"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMensaje"]
+    </div>
+}

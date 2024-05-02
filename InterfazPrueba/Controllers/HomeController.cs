@@ -1,6 +1,7 @@
 ﻿using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace InterfazPrueba.Controllers
@@ -10,6 +11,7 @@ namespace InterfazPrueba.Controllers
         private LogicaResultados logicaResultados = new LogicaResultados();
         LogicaCachePagos logicaCachePagos = new LogicaCachePagos();
         LogicaCacheEstudiantes logicaCacheEstudiantes = new LogicaCacheEstudiantes();
+        LogicaCRUDPagos logicaCRUDPagos = new LogicaCRUDPagos();
         public ActionResult Index()
         {
             return View();
@@ -36,7 +38,16 @@ namespace InterfazPrueba.Controllers
             if (TempData["PagosPendientes"] != null && TempData["InfoEstudiante"] != null)
             {
                 ViewBag.PagosPendientes = TempData["PagosPendientes"];
-                ViewBag.InfoEstudiante = JsonConvert.DeserializeObject<Estudiante>(TempData["InfoEstudiante"].ToString());
+                //ViewBag.InfoEstudiante = JsonConvert.DeserializeObject<Estudiante>(TempData["InfoEstudiante"].ToString());
+                // Verificar si la información del estudiante está en formato JSON y deserializar si es necesario
+                if (TempData["InfoEstudiante"] is string infoEstudianteJson)
+                {
+                    ViewBag.InfoEstudiante = JsonConvert.DeserializeObject<Estudiante>(infoEstudianteJson);
+                }
+                else
+                {
+                    ViewBag.InfoEstudiante = TempData["InfoEstudiante"];
+                }
             }
 
             return View();
@@ -66,6 +77,37 @@ namespace InterfazPrueba.Controllers
 
 
 
+        public ActionResult CargarPagos()
+        {
+            // Obtener los datos de TempData
+            var pagosPendientes = TempData["PagosPendientes"] as List<InterfazPrueba.Models.Pagos>;
+            var infoEstudiante = TempData["InfoEstudiante"] as InterfazPrueba.Models.Estudiante;
+
+            //Enviar banca
+
+            // Actualizar el estado de los pagos a procesado
+            foreach (var pago in pagosPendientes)
+            {
+                pago.estado = "procesado";
+                logicaCRUDPagos.actualizarPago(pago);
+            }
+            logicaCachePagos.ActualizarPagosCache();
+            TempData["PagosPendientes"] = null;
+            TempData["InfoEstudiante"] = null;
+
+
+            return RedirectToAction("PagarSemestre");
+        }
+
+        public ActionResult Secciones ()
+        {
+            return View();
+        }
+
+        public ActionResult Cart()
+        {
+            return View();
+        }
 
 
         public ActionResult About()
