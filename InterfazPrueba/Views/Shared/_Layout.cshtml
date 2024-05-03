@@ -41,6 +41,11 @@ text-align: center;
 position: absolute;
 
 }
+
+
+    .escondido {
+        display: none;
+    }
     </style >
 
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" >
@@ -52,17 +57,21 @@ position: absolute;
     <span class="navbar-toggler-icon" > </span >
     </button >
     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" >
-    <ul class="navbar-nav flex-grow-1" >
-    <li >@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" }) </li >
-    <li >@Html.ActionLink("Estudiantes", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" }) </li >
-    <li >@Html.ActionLink("Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" }) </li >
-    <li >@Html.ActionLink("Pagos", "Index", "Pagos", new { area = "" }, new { @class = "nav-link" }) </li >
-    <li >@Html.ActionLink("Morosidades", "Index", "Morosidades", new { area = "" }, new { @class = "nav-link" }) </li >
-    <li >@Html.ActionLink("Resultados", "Resultados", "Home", new { area = "" }, new { @class = "nav-link" }) </li >
-    </ul >
+        <ul class="navbar-nav flex-grow-1">
+            <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Estudiantes", "Index", "Estudiantes", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Becas", "Index", "Becas_Ayudas_Financieras", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Pagos", "Index", "Pagos", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Morosidades", "Index", "Morosidades", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Resultados", "Resultados", "Home", new { area = "" }, new { @class = "nav-link" }) </li>
+            <li>@Html.ActionLink("Secciones", "Secciones", "Home", new { area = "" }, new { @class = "nav-link" }) </li>
+        </ul>
     </div >
-    <img src="https://andrestayupanta.neocities.org/proyecto/imagenes/icons8-carrito-de-compras-64.png"
-    alt="carrito" class="carrito" > <span class="counter" id="nro-productos" > 0</span >
+
+    <a href="@Url.Action("Cart", "Home")">
+        <img src="https://andrestayupanta.neocities.org/proyecto/imagenes/icons8-carrito-de-compras-64.png" alt="carrito" class="carrito">
+        <span class="counter" id="nro-productos"> 0</span>
+    </a>
     </div >
     </nav >
 

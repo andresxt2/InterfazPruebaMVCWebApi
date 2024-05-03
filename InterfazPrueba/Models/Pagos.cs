@@ -1,4 +1,5 @@
 ﻿using InterfazPrueba.ApiEstudiantesWS;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,8 +24,12 @@ namespace InterfazPrueba.Models
         [DataType(DataType.Date)]
         public System.DateTime fecha_pago { get; set; }
 
+        [JsonProperty("precio")] // Nombre en el JSON
         public decimal monto { get; set; }
 
+      //  public string productoID { get; set; }
+
+        [JsonProperty("nombre")] // Nombre en el JSON
         public string semestre { get; set; }
         public string estado { get; set; }
 

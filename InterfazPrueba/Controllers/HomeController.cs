@@ -1,6 +1,7 @@
 ﻿using InterfazPrueba.Logica;
 using InterfazPrueba.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -107,6 +108,57 @@ namespace InterfazPrueba.Controllers
         public ActionResult Cart()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarCompra(string zapatosData, string subtotalData, string cedula)
+        {
+                // Obtener la cédula del localStorage
+               // string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+                if (string.IsNullOrEmpty(cedula))
+                {
+                    // Manejar el caso en que no se haya guardado la cédula en el localStorage
+                    return Json(new { success = false, message = "No se encontró la cédula en el localStorage" });
+            }
+            else
+            {
+                var estudiante = logicaCacheEstudiantes.ListarCacheEstudiantePorId(cedula);
+                if (estudiante == null)
+                {
+                    // Manejar el caso en que no se haya encontrado el estudiante
+                    return Json(new { success = false, message = "No se encontró el estudiante con la cédula proporcionada" });
+                }
+            }
+
+                // Deserializar los datos del carrito
+                var pagos = JsonConvert.DeserializeObject<List<Pagos>>(zapatosData);
+                decimal subtotal = Convert.ToDecimal(subtotalData);
+
+                // Crear una lista para almacenar los pagos
+                List<Pagos> pagosGuardados = new List<Pagos>();
+
+                // Crear un nuevo pago para cada elemento del carrito
+                foreach (var pago in pagos)
+                {
+                    // Asignar la cédula al pago
+                    pago.id_estudiante = cedula;
+                    pago.fecha_pago = System.DateTime.Now; // Asignar la fecha actual
+                    pago.estado = "pendiente"; // Estado quemado como pendiente, puedes cambiarlo según tus necesidades
+                    // Agregar el pago a la lista de pagos guardados
+                    logicaCRUDPagos.insertarPago(pago);
+                    pagosGuardados.Add(pago);
+                }
+
+                // Limpiar el localStorage después de procesar la compra
+                System.Web.HttpContext.Current.Session.Remove("semestres");
+                System.Web.HttpContext.Current.Session.Remove("precio");
+                System.Web.HttpContext.Current.Session.Remove("cedula");
+
+                // Devolver una respuesta al cliente si es necesario
+                return Json(new { success = true, message = "Compra guardada correctamente", pagos = pagosGuardados });
+            
+
         }
 
 

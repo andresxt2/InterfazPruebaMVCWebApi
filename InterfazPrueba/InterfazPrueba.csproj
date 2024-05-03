@@ -242,9 +242,9 @@
     <Content Include="Sources\js\broadcastHandler.js" />
     <Content Include="Sources\js\cart.js" />
     <Content Include="Sources\js\cartService.js" />
+    <Content Include="Sources\js\comprarAction.js" />
     <Content Include="Sources\js\pago.js" />
     <Content Include="Sources\js\site.js" />
-    <Content Include="Sources\js\video.js" />
     <Content Include="Sources\paginacion.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -284,6 +284,7 @@
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\Secciones.cshtml" />
     <Content Include="Views\Home\PagarSemestre.cshtml" />
+    <Content Include="Views\Home\Cart - Copia.cshtml" />
     <None Include="Web References\ApiBecasWS\API_GestionBecas.wsdl" />
     <Content Include="Web References\ApiBecasWS\Becas_Ayudas_Financieras.datasource">
       <DependentUpon>Reference.map</DependentUpon>

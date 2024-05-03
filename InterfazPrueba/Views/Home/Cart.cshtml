@@ -5,6 +5,62 @@
 
 @section Scripts {
     <script src="~/Sources/js/cart.js" defer></script>
+    <script>
+        document.getElementById("comprar").addEventListener("click", () => {
+            // Mostrar el modal para ingresar la cédula
+            const cedula = prompt("Por favor, ingresa tu cédula:");
+
+            // Verificar si se ingresó una cédula
+            if (cedula !== null && cedula !== "") {
+                var resultado = confirm("¿Estás seguro de que deseas comprar los productos en el carrito?");
+                if (resultado) {
+                    // Obtener los datos del carrito del localStorage
+                    const zapatosData = localStorage.getItem("semestres");
+                    const subtotalData = localStorage.getItem("precio");
+
+                    // Guardar la cédula en el localStorage
+                    localStorage.setItem("cedula", cedula);
+
+                    // Enviar los datos al controlador Cart usando fetch
+                    fetch('@Url.Action("GuardarCompra", "Home")', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ZapatosData: zapatosData,
+                            SubtotalData: subtotalData,
+                            Cedula: cedula // Enviar la cédula al controlador
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Manejar la respuesta del servidor si es necesario
+                            console.log(data);
+                            // Redirigir a donde quieras después de procesar la compra
+                             if (data.success) {
+                    // Redirigir a donde quieras después de procesar la compra
+                    window.location.href = '@Url.Action("Index", "Home")';
+                    // Limpiar el localStorage si la compra se realiza con éxito
+                    localStorage.removeItem("semestres");
+                    localStorage.removeItem("precio");
+                    localStorage.removeItem("cedula");
+                } else {
+                    // Mostrar un mensaje de error si la compra falla
+                    alert(data.message);
+                }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            } else {
+                // Si el usuario cancela o no ingresa la cédula, muestra un mensaje de error
+                alert("Debes ingresar tu cédula para realizar la compra.");
+            }
+        });
+    </script>
+
 }
 
 <section class="container" id="cart-container">
@@ -15,7 +71,7 @@
 
 <p id="carrito-vacio" class="text-center">Ups! Tu carrito está vacío, <a href="@Url.Action("Index", "Home")">elige algunos productos</a></p>
 
-<form action="@Url.Action("Comprar", "Home")" method="post">
+<form method="post">
     <div id="hidden-section">
         <input type="hidden" id="zapatosData" name="ZapatosData" />
         <input type="hidden" id="subtotalData" name="SubtotalData" />
@@ -36,3 +92,4 @@
         @TempData["ErrorMensaje"]
     </div>
 }
+
