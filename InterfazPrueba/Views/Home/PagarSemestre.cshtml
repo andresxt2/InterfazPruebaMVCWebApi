@@ -74,13 +74,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8 d-flex justify-content-center">
-                <!-- Botón para cargar los pagos -->
-                <a href="@Url.Action("CargarPagos", new { pagosPendientes = ViewBag.PagosPendientes, infoEstudiante = ViewBag.InfoEstudiante })" class="btn btn-success @if (todosProcesados) { <text>disabled</text> }">Cargar Pagos</a>
-            </div>
-        </div>
-
     </div>
     TempData["PagosPendientes"] = ViewBag.PagosPendientes;
     TempData["InfoEstudiante"] = ViewBag.InfoEstudiante;

@@ -61,7 +61,7 @@ namespace InterfazPrueba.Controllers
         {
             if (ModelState.IsValid)
             {
-                var pagosPendientes = logicaCachePagos.ListarCachePendientes(pago.id_estudiante);
+                var pagosPendientes = logicaCRUDPagos.ListarPagosPorEstudiante(pago.id_estudiante);
                 var estudiantePagoPendiente = logicaCacheEstudiantes.ListarCacheEstudiantePorId(pago.id_estudiante);
                 // Guardar los pagos pendientes en TempData para pasarlos a otra acción
                 TempData["PagosPendientes"] = pagosPendientes;
@@ -149,7 +149,7 @@ namespace InterfazPrueba.Controllers
                     logicaCRUDPagos.insertarPago(pago);
                     pagosGuardados.Add(pago);
                 }
-
+                logicaCachePagos.ActualizarPagosCache();
                 // Limpiar el localStorage después de procesar la compra
                 System.Web.HttpContext.Current.Session.Remove("semestres");
                 System.Web.HttpContext.Current.Session.Remove("precio");

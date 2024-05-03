@@ -27,7 +27,7 @@ namespace InterfazPrueba.Views.UIPagos
             var pageNumber = page ?? 1;
             var pageSize = 100; // Cantidad de elementos por página
 
-            var pagosList = LogicaCachePagos.ListarPagosCache(); // Asegúrate de que esto devuelve una lista
+            var pagosList = LogicaCRUDPagos.ListarPagos(); // Asegúrate de que esto devuelve una lista
 
 
             if (!string.IsNullOrEmpty(EPVM.EstadoPagoSeleccionado))
@@ -89,7 +89,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
+            Pagos pagos = LogicaCRUDPagos.listarPagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();
@@ -141,7 +141,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
+            Pagos pagos = LogicaCRUDPagos.listarPagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();
@@ -186,7 +186,7 @@ namespace InterfazPrueba.Views.UIPagos
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pagos pagos = LogicaCachePagos.ListarCachePagoPorId(id.Value);
+            Pagos pagos = LogicaCRUDPagos.listarPagoPorId(id.Value);
             if (pagos == null)
             {
                 return HttpNotFound();

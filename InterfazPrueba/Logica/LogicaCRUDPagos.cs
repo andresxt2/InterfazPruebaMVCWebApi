@@ -13,11 +13,8 @@ namespace InterfazPrueba.Logica
         {
             List<Models.Pagos> listaPagos = new List<Models.Pagos>();
             var pagosWS = pagos.Listar();
-            int contador = 0;
             foreach (var pagoWS in pagosWS)
             {
-                if (contador < 5000)
-                {
                     Models.Pagos pago = new Models.Pagos();
                     pago.id_pago = pagoWS.id_pago;
                     pago.cod_pago = pagoWS.cod_pago;
@@ -27,12 +24,6 @@ namespace InterfazPrueba.Logica
                     pago.semestre = pagoWS.semestre;
                     pago.estado = pagoWS.estado;
                     listaPagos.Add(pago);
-                }
-                else
-                {
-                    break;
-                }
-                contador++;
             }
             return listaPagos;
         }
@@ -76,6 +67,16 @@ namespace InterfazPrueba.Logica
         public bool eliminarPago(int id)
         {
             return pagos.Eliminar(id);
+        }
+
+        public Models.Pagos listarPagoPorId (int id)
+        {
+            return ListarPagos().FirstOrDefault(p => p.id_pago == id);
+        }
+
+        public List<Models.Pagos> ListarPagosPorEstudiante(string id)
+        {
+            return ListarPagos().Where(p => p.id_estudiante == id).ToList();
         }
     }
 }
