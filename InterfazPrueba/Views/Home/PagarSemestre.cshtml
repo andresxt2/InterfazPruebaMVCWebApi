@@ -17,7 +17,7 @@
     }
 }
 
-<h2>Pagar Semestre</h2>
+<h2>Semestre</h2>
 
 @using (Html.BeginForm("PagarSemestre", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -33,7 +33,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Buscar Pagos Pendientes" class="btn btn-primary mt-2" />
+            <input type="submit" value="Buscar Pagos" class="btn btn-primary mt-2" />
         </div>
     </div>
 }
@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <h3>Pagos Pendientes</h3>
+                <h3>Estado de Pagos</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>

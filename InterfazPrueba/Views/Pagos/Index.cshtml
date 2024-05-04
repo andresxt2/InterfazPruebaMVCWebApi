@@ -15,9 +15,8 @@
             model => model.EstadoPagoSeleccionado,
             new SelectList(new List<SelectListItem>
             {
-                new SelectListItem { Text = "Completo", Value = "Completo" },
-                new SelectListItem { Text = "Parcial", Value = "Parcial" },
-                new SelectListItem { Text = "Pendiente", Value = "Pendiente" }
+                new SelectListItem { Text = "Pagado", Value = "pagado" },
+                new SelectListItem { Text = "Pendiente", Value = "pendiente" }
             }, "Value", "Text"),
             "Selecciona un estado",
             new { @class = "form-control", @id = "estadoPago" }

@@ -21,6 +21,7 @@ function crearTarjetasProductos() {
                     </div>
                     <div class="col-12 col-md-6 text-center mb-3">
                         <span class="text-center fw-bold p-5">${producto.nombre}</span>
+                        <button type="button" class="bg-warning-subtle fw-bold" id="btnreducir">-</button>
                         <span class="text-center fw-bold precio-font p-3">$${producto.precio}</span>                    
                         <span class="p-2" id="cantidad-producto">${producto.cantidad}</span>
                     </div>
@@ -28,7 +29,13 @@ function crearTarjetasProductos() {
             </section>`;
 
             contenedor.appendChild(newShoe);
-
+            newShoe.getElementsByTagName("button")[0].addEventListener("click", (e) => {
+                const cuentaElement = e.target.parentElement.getElementsByTagName("span")[2];
+                cuentaElement.innerText = restarAlCarrito(producto);
+                crearTarjetasProductos();
+                actualizarTotales();
+                revisarMensajeVacio();
+            });
         });
     }
     revisarMensajeVacio();
